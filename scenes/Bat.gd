@@ -45,18 +45,18 @@ func _physics_process(delta):
 	flutter_timer += delta
 	
 	if chasing:
-		if (player.position - position).length_squared() > 160 * 160:
-			print("Player got away!")
-			chasing = false
-			var space_state = get_world_2d().direct_space_state
-			var query = PhysicsRayQueryParameters2D.create(position, Vector2(0.0, -640.0))
-			var result = space_state.intersect_ray(query)
-			if result:
-				print("Should nest at " + str(result.position))
-				nesting_target = result.position
-			else:
-				print("No nesting target found; keep chasing player")
-				chasing = true
+		# if (player.position - position).length_squared() > 160 * 160:
+		#	print("Player got away!")
+		#	chasing = false
+		#	var space_state = get_world_2d().direct_space_state
+		#	var query = PhysicsRayQueryParameters2D.create(position, Vector2(0.0, -640.0))
+		#	var result = space_state.intersect_ray(query)
+		#	if result:
+		#		print("Should nest at " + str(result.position))
+		#		nesting_target = result.position
+		#	else:
+		#		print("No nesting target found; keep chasing player")
+		#		chasing = true
 		
 		var player_pos = player.position + Vector2(0.0, sin(flutter_timer * 8.0) * 16.0)
 		var dir_to_player = (player_pos - position).normalized()

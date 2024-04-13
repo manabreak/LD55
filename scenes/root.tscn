@@ -985,30 +985,6 @@ offset_bottom = -65.0
 [node name="Bat" parent="Items" node_paths=PackedStringArray("player") instance=ExtResource("19_ey2ml")]
 player = NodePath("../../Player")
 
-[node name="Bat2" parent="Items" node_paths=PackedStringArray("player") instance=ExtResource("19_ey2ml")]
-position = Vector2(481, -120)
-player = NodePath("../../Player")
-
-[node name="Bat3" parent="Items" node_paths=PackedStringArray("player") instance=ExtResource("19_ey2ml")]
-position = Vector2(448, -120)
-player = NodePath("../../Player")
-
-[node name="Bat4" parent="Items" node_paths=PackedStringArray("player") instance=ExtResource("19_ey2ml")]
-position = Vector2(655, -249)
-player = NodePath("../../Player")
-
-[node name="Bat5" parent="Items" node_paths=PackedStringArray("player") instance=ExtResource("19_ey2ml")]
-position = Vector2(689, -249)
-player = NodePath("../../Player")
-
-[node name="Bat6" parent="Items" node_paths=PackedStringArray("player") instance=ExtResource("19_ey2ml")]
-position = Vector2(760, -249)
-player = NodePath("../../Player")
-
-[node name="Bat7" parent="Items" node_paths=PackedStringArray("player") instance=ExtResource("19_ey2ml")]
-position = Vector2(805, -249)
-player = NodePath("../../Player")
-
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
 tile_set = SubResource("TileSet_wa3v4")

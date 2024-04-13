@@ -3,6 +3,7 @@ extends RigidBody2D
 var player: CharacterBody2D
 
 var life_timer = 3.0
+var bounce = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,15 +14,20 @@ func _on_area_2d_body_entered(body):
 	if body == player:
 		print("Player stepped on trampoline!")
 		player.launch_with_trampoline()
-		# TODO Animate trampoline before freeing it
 		destroy()
+
+func _physics_process(delta):
+	if bounce:
+		apply_impulse(Vector2(randf_range(-50.0, 50.0), -200.0))
+		bounce = false
 
 func destroy():
 	$CollisionShape2D.disabled = true
 	collision_layer = 0
 	collision_mask = 0
+	$Area2D.queue_free()
+	bounce = true
 	player.active_trampoline = null
-	apply_impulse(Vector2(randf_range(-50.0, 50.0), -0.0))
 	var tween = get_tree().create_tween()
 	var rotation_amount = randf_range(-60.0, 60.0)
 	var rotation_time = abs(rotation_amount / 5.0)
