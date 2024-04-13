@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxvk0gga1kjrx"]
+
+[ext_resource type="Script" path="res://scenes/bubble.gd" id="1_ks7ef"]
+[ext_resource type="FontFile" uid="uid://cku343h0naeys" path="res://assets/Kenney Pixel.ttf" id="2_tjjvi"]
+
+[sub_resource type="Theme" id="Theme_uhtg7"]
+default_font = ExtResource("2_tjjvi")
+default_font_size = 16
+
+[sub_resource type="LabelSettings" id="LabelSettings_1y2cg"]
+
+[node name="Bubble" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -832.0
+offset_bottom = -408.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ks7ef")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.243137, 0.113725, 0.341176, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Text" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = SubResource("Theme_uhtg7")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.262745)
+text = "Hello, world!"
+label_settings = SubResource("LabelSettings_1y2cg")
+autowrap_mode = 2
+visible_characters_behavior = 1
