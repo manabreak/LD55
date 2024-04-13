@@ -14,7 +14,7 @@ func _process(delta):
 
 
 func _on_restart_button_pressed():
-	game_controller.restart_level()
+	game_controller.restart()
 
 
 func _on_quit_button_pressed():

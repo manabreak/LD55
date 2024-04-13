@@ -27,10 +27,10 @@ var seq_id = 0
 var seq_step = 0
 
 # spell 0 = fireball
-var spell_0_collected = true
+var spell_0_collected = false
 
 # spell 1 = trampoline
-var spell_1_collected = true
+var spell_1_collected = false
 
 # spell 2 = summon a stone
 var spell_2_collected = false
@@ -41,6 +41,9 @@ var active_trampoline = null
 var health = 3
 
 func damage(amount: int):
+	if health == 0:
+		return
+	
 	print("Player damaged for " + str(amount))
 	health -= amount
 	if health < 0:

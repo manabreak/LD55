@@ -19,6 +19,11 @@ func _process(delta):
 	pass
 
 
+func restart():
+	print("Restarting...")
+	get_tree().change_scene_to_file("res://scenes/root.tscn")
+	# TODO nice fades etc.
+
 func fade_level_out():
 	$GUI.get_node("EndGameUI").modulate.a = 0.0
 	$GUI.get_node("EndGameUI").visible = true
