@@ -1,7 +1,7 @@
 extends RigidBody2D
 
-const LIFE = 3.0
-var freeze_time = 1.0
+const LIFE = 5.0
+var freeze_time = 0.5
 var timer = 0.0
 
 var player = null

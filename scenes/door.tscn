@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://domrkmmu4k4os"]
+
+[ext_resource type="Script" path="res://scenes/Door.gd" id="1_534sh"]
+[ext_resource type="Texture2D" uid="uid://blqbdk3s0wrj5" path="res://assets/button_up.png" id="2_khfl8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ih8ec"]
+size = Vector2(31, 48)
+
+[node name="Door" type="Area2D" node_paths=PackedStringArray("player")]
+position = Vector2(1324, -129)
+script = ExtResource("1_534sh")
+player = NodePath("")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4.5, 10)
+shape = SubResource("RectangleShape2D_ih8ec")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4, -23)
+texture = ExtResource("2_khfl8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

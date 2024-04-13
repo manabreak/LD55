@@ -2,9 +2,10 @@ extends CharacterBody2D
 
 @export var stone_scene: PackedScene
 @export var trampoline_scene: PackedScene
+@export var game_controller: Node2D
 
 const STONE_CAST_TIME = 1.0
-const TRAMPOLINE_CAST_TIME = 3.0
+const TRAMPOLINE_CAST_TIME = 1.0
 const SPEED_MAX = 140.0
 const JUMP_VELOCITY_INITIAL = -200.0
 const JUMP_APPLY_TIME = 1.0
@@ -35,6 +36,48 @@ var spell_1_collected = true
 var spell_2_collected = false
 
 var active_spell = 0
+var active_trampoline = null
+
+var health = 3
+
+func damage(amount: int):
+	print("Player damaged for " + str(amount))
+	health -= amount
+	if health < 0:
+		health = 0
+	
+	if health == 0:
+		print("Player died!")
+		do_die()
+	else:
+		controls_enabled = false
+		$MainSprite.play("take_hit")
+		velocity.x = 0.0
+		var tween = get_tree().create_tween()
+		tween.tween_property(self, "controls_enabled", true, 0.5)
+
+func heal(amount: int):
+	health += amount
+	if health > 3:
+		health = 3
+	
+	print("Player healed for " + str(amount) + ", health now: " + str(health))
+
+func kill():
+	health = 0
+	do_die()
+
+func do_die():
+	print("Handling dying logic")
+	controls_enabled = false
+	$MainSprite.play("take_hit")
+	velocity.x = 0.0
+	var timer = get_tree().create_timer(2.5)
+	timer.timeout.connect(set_dead_sprite)
+	game_controller.fade_level_out()
+
+func set_dead_sprite():
+	$MainSprite.play("dead")
 
 func collect_spell(spell: int):
 	if spell == 0:
@@ -50,6 +93,9 @@ func _ready():
 	$Bubble.text_visible.connect(_on_text_visible)
 
 func _process(delta):
+	if Input.is_action_just_pressed("instakill"):
+		damage(1)
+	
 	if Input.is_action_just_pressed("choose_slot_0"):
 		if spell_0_collected:
 			active_spell = 0
@@ -73,6 +119,10 @@ func _physics_process(delta):
 			# Trampoline
 			if trampoline_spawn_timer <= 0:
 				print("Can spawn a trampoline")
+				
+				if active_trampoline != null:
+					active_trampoline.destroy()
+				
 				var trampoline = trampoline_scene.instantiate()
 				trampoline.player = self
 				if facing_right:
@@ -81,6 +131,7 @@ func _physics_process(delta):
 					trampoline.position = position - $TrampolineSpawnPoint.position
 				get_parent().get_node("Items").add_child(trampoline)
 				trampoline_spawn_timer = TRAMPOLINE_CAST_TIME
+				active_trampoline = trampoline
 				
 		elif active_spell == 2 and spell_2_collected:
 			if stone_spawn_timer <= 0:
