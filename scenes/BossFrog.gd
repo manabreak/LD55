@@ -10,7 +10,7 @@ var player: CharacterBody2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	play("idle")
-	do_intro_sequence()
+	# do_intro_sequence()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -21,6 +21,7 @@ func _process(delta):
 func do_intro_sequence():
 	seq_id = 0
 	seq_step = 0
+	player.controls_enabled = false
 	$Bubble.text_visible.connect(_on_text_visible)
 	$Bubble.display_text("Full moon, summer solstice, swamp full of delicious flies...", 4.0)
 	

@@ -14,7 +14,7 @@ size = Vector2(12, 4)
 _data = [Vector2(0, 1), 0.0, -0.460939, 0, 0, Vector2(0.996485, 0.00386345), -6.03321, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_etxyu"]
+[sub_resource type="CurveTexture" id="CurveTexture_dlkbq"]
 texture_mode = 1
 curve = SubResource("Curve_bs78w")
 
@@ -22,7 +22,7 @@ curve = SubResource("Curve_bs78w")
 _data = [Vector2(0, 0.644237), 0.0, 7.03115, 0, 0, Vector2(1, 0.317772), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_lum1b"]
+[sub_resource type="CurveTexture" id="CurveTexture_e05vg"]
 curve = SubResource("Curve_a5tom")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jdle4"]
@@ -38,8 +38,8 @@ damping_min = 25.505
 damping_max = 62.416
 scale_min = 0.5
 scale_max = 0.5
-scale_curve = SubResource("CurveTexture_lum1b")
-alpha_curve = SubResource("CurveTexture_etxyu")
+scale_curve = SubResource("CurveTexture_e05vg")
+alpha_curve = SubResource("CurveTexture_dlkbq")
 
 [node name="Stone" type="RigidBody2D"]
 collision_layer = 3

@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://b5kwm2yaphkln"]
+
+[ext_resource type="Texture2D" uid="uid://clcss7aqsyj68" path="res://assets/trampoline.png" id="1_m432q"]
+[ext_resource type="Script" path="res://scenes/trampoline.gd" id="1_yigf3"]
+[ext_resource type="Texture2D" uid="uid://dsa040m4ksaeu" path="res://assets/circle_16px.png" id="3_odtjp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3chrm"]
+size = Vector2(16, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sj5cb"]
+size = Vector2(10, 3)
+
+[sub_resource type="Curve" id="Curve_j2wdn"]
+_data = [Vector2(0, 1), 0.0, -0.460939, 0, 0, Vector2(0.996485, 0.00386345), -6.03321, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_etxyu"]
+texture_mode = 1
+curve = SubResource("Curve_j2wdn")
+
+[sub_resource type="Curve" id="Curve_3ori1"]
+_data = [Vector2(0, 0.644237), 0.0, 7.03115, 0, 0, Vector2(1, 0.317772), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lum1b"]
+curve = SubResource("Curve_3ori1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4r5h7"]
+particle_flag_disable_z = true
+spread = 180.0
+flatness = 0.812
+initial_velocity_min = 23.42
+initial_velocity_max = 33.36
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = -37.58
+tangential_accel_max = 34.23
+damping_min = 25.505
+damping_max = 62.416
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_lum1b")
+alpha_curve = SubResource("CurveTexture_etxyu")
+
+[node name="Trampoline" type="RigidBody2D"]
+script = ExtResource("1_yigf3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_3chrm")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_sj5cb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_m432q")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="TrampolineSpawnParticles" type="GPUParticles2D" parent="."]
+texture_filter = 1
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_4r5h7")
+texture = ExtResource("3_odtjp")
+lifetime = 0.95
+speed_scale = 1.21
+explosiveness = 0.91
+randomness = 0.2
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
