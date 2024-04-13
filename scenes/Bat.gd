@@ -12,11 +12,24 @@ var nesting_target = Vector2()
 var attacking = false
 var attack_timer = 0.0
 
+var health = 1
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Sprite2D.play("idle")
 
 var flutter_timer = 0.0
+
+func damage(amount: int):
+	if health == 0:
+		return
+	
+	health -= amount
+	if health < 0:
+		health = 0
+	
+	if health == 0:
+		queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -32,7 +45,7 @@ func _physics_process(delta):
 	flutter_timer += delta
 	
 	if chasing:
-		if (player.position - position).length_squared() > 128 * 128:
+		if (player.position - position).length_squared() > 160 * 160:
 			print("Player got away!")
 			chasing = false
 			var space_state = get_world_2d().direct_space_state
@@ -58,7 +71,12 @@ func _physics_process(delta):
 		print("Distance to nest: " + str(distance_to_nest))
 		if distance_to_nest < 12.0:
 			print("Ready to nest!")
-			position.y = roundf(position.y / 16.0) * 16.0 - 8.0
+			position.y = roundf(position.y / 16.0) * 16.0
+			if distance_to_nest < 8.0:
+				position.y += 16.0
+			else:
+				position.y -= 16.0
+				
 			awake = false
 			$Sprite2D.play("idle")
 		else:

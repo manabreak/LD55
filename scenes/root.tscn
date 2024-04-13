@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://q5wm8qy8vfkj"]
+[gd_scene load_steps=59 format=3 uid="uid://q5wm8qy8vfkj"]
 
 [ext_resource type="Texture2D" uid="uid://bboe16dw6ucw" path="res://assets/lava.png" id="1_2bh0f"]
 [ext_resource type="Script" path="res://scenes/GameController.gd" id="1_td7vl"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bxtfpn1ykgxll" path="res://assets/tileset.png" id="2_u7y2a"]
 [ext_resource type="Script" path="res://scenes/Player.gd" id="3_260c8"]
 [ext_resource type="Texture2D" uid="uid://ileoor2cjtbe" path="res://assets/player_idle.png" id="3_u48yx"]
+[ext_resource type="PackedScene" uid="uid://nnpcxjc8r5p" path="res://scenes/fireball.tscn" id="4_qrmcy"]
 [ext_resource type="Texture2D" uid="uid://csvv1e52ckm5k" path="res://assets/player_walk.png" id="5_32lk6"]
 [ext_resource type="Texture2D" uid="uid://diarqkujldgjf" path="res://assets/player_jump.png" id="5_ak43b"]
 [ext_resource type="PackedScene" uid="uid://b5kwm2yaphkln" path="res://scenes/trampoline.tscn" id="5_fksa3"]
@@ -21,8 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://domrkmmu4k4os" path="res://scenes/door.tscn" id="13_mli1d"]
 [ext_resource type="Script" path="res://scenes/LavaPool.gd" id="14_2nemk"]
 [ext_resource type="PackedScene" uid="uid://cxvk0gga1kjrx" path="res://scenes/bubble.tscn" id="14_umt66"]
-[ext_resource type="Script" path="res://scenes/Bat.gd" id="19_gfqia"]
-[ext_resource type="Texture2D" uid="uid://bpm38wmvthc2j" path="res://assets/bat.png" id="19_kraeh"]
+[ext_resource type="PackedScene" uid="uid://cgd465m2l7sim" path="res://scenes/bat.tscn" id="19_ey2ml"]
 [ext_resource type="FontFile" uid="uid://cku343h0naeys" path="res://assets/Kenney Pixel.ttf" id="22_32u5g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jjy2f"]
@@ -357,48 +357,6 @@ animations = [{
 "name": &"summon",
 "speed": 12.0
 }]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_1x0f2"]
-radius = 7.07107
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0nn1k"]
-atlas = ExtResource("19_kraeh")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2mdd4"]
-atlas = ExtResource("19_kraeh")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5xath"]
-atlas = ExtResource("19_kraeh")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_jxppf"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0nn1k")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2mdd4")
-}],
-"loop": true,
-"name": &"fly",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5xath")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_u6ebm"]
-size = Vector2(80, 48)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_d0qyl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6kumb"]
 texture = ExtResource("1_2bh0f")
@@ -911,7 +869,8 @@ texture = ExtResource("2_u7y2a")
 17:11/0/physics_layer_1/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_wa3v4"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 4
 physics_layer_1/collision_layer = 2
 physics_layer_1/collision_mask = 2
 sources/2 = SubResource("TileSetAtlasSource_6kumb")
@@ -931,8 +890,10 @@ format = 2
 layer_0/tile_data = PackedInt32Array(-327679, 65536, 1, -262143, 65536, 2, -327678, 131072, 1, -262142, 131072, 2, -327677, 65536, 1, -262141, 65536, 2, -327676, 131072, 1, -262140, 131072, 2, -327675, 65536, 1, -262139, 65536, 2, -327674, 131072, 1, -262138, 131072, 2, -327673, 65536, 1, -262137, 65536, 2, -327672, 131072, 1, -262136, 131072, 2, -327671, 65536, 1, -262135, 65536, 2, -327670, 131072, 1, -262134, 131072, 2, -327669, 65536, 1, -262133, 65536, 2, -327668, 131072, 1, -262132, 131072, 2, -327667, 65536, 1, -262131, 65536, 2, -327666, 131072, 1, -262130, 131072, 2, -327665, 65536, 1, -262129, 65536, 2, -327664, 131072, 1, -262128, 131072, 2, -196607, 65536, 1, -131071, 65536, 2, -196606, 131072, 1, -131070, 131072, 2, -196605, 65536, 1, -131069, 65536, 2, -196604, 131072, 1, -131068, 131072, 2, -196603, 65536, 1, -131067, 65536, 2, -196602, 131072, 1, -131066, 131072, 2, -196601, 65536, 1, -131065, 65536, 2, -196600, 131072, 1, -131064, 131072, 2, -196599, 65536, 1, -131063, 65536, 2, -196598, 131072, 1, -131062, 131072, 2, -196597, 65536, 1, -131061, 65536, 2, -196596, 131072, 1, -131060, 131072, 2, -196595, 65536, 1, -131059, 65536, 2, -196594, 131072, 1, -131058, 131072, 2, -196593, 65536, 1, -131057, 65536, 2, -196592, 131072, 1, -131056, 131072, 2, -196591, 65536, 1, -131055, 65536, 2, -196590, 131072, 1, -131054, 131072, 2, -65519, 65536, 1, 17, 65536, 2, -65518, 131072, 1, 18, 131072, 2, -65521, 65536, 1, 15, 65536, 2, -65520, 131072, 1, 16, 131072, 2, -65523, 65536, 1, 13, 65536, 2, -65522, 131072, 1, 14, 131072, 2, -65525, 65536, 1, 11, 65536, 2, -65524, 131072, 1, 12, 131072, 2, -65527, 65536, 1, 9, 65536, 2, -65526, 131072, 1, 10, 131072, 2, -65529, 65536, 1, 7, 65536, 2, -65528, 131072, 1, 8, 131072, 2, -65531, 65536, 1, 5, 65536, 2, -65530, 131072, 1, 6, 131072, 2, -65533, 65536, 1, 3, 65536, 2, -65532, 131072, 1, 4, 131072, 2, -65535, 65536, 1, 1, 65536, 2, -65534, 131072, 1, 2, 131072, 2, -1, 65536, 1, 65535, 65536, 2, -65536, 131072, 1, 0, 131072, 2, -131073, 65536, 1, -65537, 65536, 2, -196608, 131072, 1, -131072, 131072, 2, 65537, 65536, 1, 131073, 65536, 2, 65538, 131072, 1, 131074, 131072, 2, 65539, 65536, 1, 131075, 65536, 2, 65540, 131072, 1, 131076, 131072, 2, 65541, 65536, 1, 131077, 65536, 2, 65542, 131072, 1, 131078, 131072, 2, 65543, 65536, 1, 131079, 65536, 2, 65544, 131072, 1, 131080, 131072, 2, 65545, 65536, 1, 131081, 65536, 2, 65546, 131072, 1, 131082, 131072, 2, 65547, 65536, 1, 131083, 65536, 2, 65548, 131072, 1, 131084, 131072, 2, 65549, 65536, 1, 131085, 65536, 2, 65550, 131072, 1, 131086, 131072, 2, 65551, 65536, 1, 131087, 65536, 2, 65552, 131072, 1, 131088, 131072, 2, -589742, 0, 8, -524206, 0, 9, -458670, 0, 10, -589741, 65536, 8, -524205, 65536, 9, -458669, 65536, 10)
 
 [node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("game_controller")]
-position = Vector2(437, -100)
+position = Vector2(645, -102)
+collision_mask = 5
 script = ExtResource("3_260c8")
+fireball_scene = ExtResource("4_qrmcy")
 stone_scene = ExtResource("2_imu5o")
 trampoline_scene = ExtResource("5_fksa3")
 game_controller = NodePath("..")
@@ -976,12 +937,12 @@ position = Vector2(27, 7)
 
 [node name="Items" type="Node2D" parent="."]
 
-[node name="StoneBook" parent="Items" node_paths=PackedStringArray("player") instance=ExtResource("11_lrvcc")]
-position = Vector2(1144, -230)
+[node name="TrampoBook" parent="Items" node_paths=PackedStringArray("player") instance=ExtResource("11_lrvcc")]
+position = Vector2(377, -226)
 player = NodePath("../../Player")
 
-[node name="TrampolineBook" parent="Items" node_paths=PackedStringArray("player") instance=ExtResource("11_lrvcc")]
-position = Vector2(376, -231)
+[node name="StoneBook" parent="Items" node_paths=PackedStringArray("player") instance=ExtResource("11_lrvcc")]
+position = Vector2(1150, -232)
 spell_type = 2
 player = NodePath("../../Player")
 
@@ -1021,29 +982,32 @@ offset_top = -97.0
 offset_right = 73.0
 offset_bottom = -65.0
 
-[node name="Bat" type="CharacterBody2D" parent="Items" node_paths=PackedStringArray("player")]
-position = Vector2(504, -120)
-script = ExtResource("19_gfqia")
+[node name="Bat" parent="Items" node_paths=PackedStringArray("player") instance=ExtResource("19_ey2ml")]
 player = NodePath("../../Player")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Items/Bat"]
-shape = SubResource("CircleShape2D_1x0f2")
+[node name="Bat2" parent="Items" node_paths=PackedStringArray("player") instance=ExtResource("19_ey2ml")]
+position = Vector2(481, -120)
+player = NodePath("../../Player")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="Items/Bat"]
-sprite_frames = SubResource("SpriteFrames_jxppf")
-animation = &"fly"
+[node name="Bat3" parent="Items" node_paths=PackedStringArray("player") instance=ExtResource("19_ey2ml")]
+position = Vector2(448, -120)
+player = NodePath("../../Player")
 
-[node name="WakeupZone" type="Area2D" parent="Items/Bat"]
+[node name="Bat4" parent="Items" node_paths=PackedStringArray("player") instance=ExtResource("19_ey2ml")]
+position = Vector2(655, -249)
+player = NodePath("../../Player")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Items/Bat/WakeupZone"]
-position = Vector2(0, 16)
-shape = SubResource("RectangleShape2D_u6ebm")
+[node name="Bat5" parent="Items" node_paths=PackedStringArray("player") instance=ExtResource("19_ey2ml")]
+position = Vector2(689, -249)
+player = NodePath("../../Player")
 
-[node name="AttackZone" type="Area2D" parent="Items/Bat"]
+[node name="Bat6" parent="Items" node_paths=PackedStringArray("player") instance=ExtResource("19_ey2ml")]
+position = Vector2(760, -249)
+player = NodePath("../../Player")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Items/Bat/AttackZone"]
-shape = SubResource("CircleShape2D_d0qyl")
-debug_color = Color(0.878431, 0.254902, 0.576471, 0.419608)
+[node name="Bat7" parent="Items" node_paths=PackedStringArray("player") instance=ExtResource("19_ey2ml")]
+position = Vector2(805, -249)
+player = NodePath("../../Player")
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
@@ -1140,8 +1104,5 @@ flat = true
 
 [connection signal="body_entered" from="Items/LavaPool" to="Items/LavaPool" method="_on_body_entered"]
 [connection signal="body_entered" from="Items/LavaPool2" to="Items/LavaPool2" method="_on_body_entered"]
-[connection signal="body_entered" from="Items/Bat/WakeupZone" to="Items/Bat" method="_on_wakeup_zone_body_entered"]
-[connection signal="body_entered" from="Items/Bat/AttackZone" to="Items/Bat" method="_on_attack_zone_body_entered"]
-[connection signal="body_exited" from="Items/Bat/AttackZone" to="Items/Bat" method="_on_attack_zone_body_exited"]
 [connection signal="pressed" from="GUI/EndGameUI/CenterContainer/MarginContainer/VBoxContainer/RestartButton" to="GUI" method="_on_restart_button_pressed"]
 [connection signal="pressed" from="GUI/EndGameUI/CenterContainer/MarginContainer/VBoxContainer/QuitButton" to="GUI" method="_on_quit_button_pressed"]

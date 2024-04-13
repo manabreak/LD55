@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=3 uid="uid://cgd465m2l7sim"]
+
+[ext_resource type="Script" path="res://scenes/Bat.gd" id="1_yd2ge"]
+[ext_resource type="Texture2D" uid="uid://bpm38wmvthc2j" path="res://assets/bat.png" id="2_mawrq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1x0f2"]
+radius = 7.07107
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0nn1k"]
+atlas = ExtResource("2_mawrq")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mdd4"]
+atlas = ExtResource("2_mawrq")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xath"]
+atlas = ExtResource("2_mawrq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jxppf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0nn1k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2mdd4")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xath")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u6ebm"]
+size = Vector2(80, 48)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d0qyl"]
+
+[node name="Bat" type="CharacterBody2D"]
+position = Vector2(504, -120)
+collision_layer = 16
+collision_mask = 15
+script = ExtResource("1_yd2ge")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1x0f2")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jxppf")
+animation = &"fly"
+
+[node name="WakeupZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WakeupZone"]
+position = Vector2(0, 16)
+shape = SubResource("RectangleShape2D_u6ebm")
+
+[node name="AttackZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone"]
+shape = SubResource("CircleShape2D_d0qyl")
+debug_color = Color(0.878431, 0.254902, 0.576471, 0.419608)
+
+[connection signal="body_entered" from="WakeupZone" to="." method="_on_wakeup_zone_body_entered"]
+[connection signal="body_entered" from="AttackZone" to="." method="_on_attack_zone_body_entered"]
+[connection signal="body_exited" from="AttackZone" to="." method="_on_attack_zone_body_exited"]

@@ -25,6 +25,6 @@ func _process(delta):
 
 func _on_body_entered(body):
 	if body == player:
-		print("Book collected by the player!")
+		print("Book collected by the player! Granting spell " + str(spell_type))
 		player.collect_spell(spell_type)
 		queue_free()

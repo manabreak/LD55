@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@export var fireball_scene: PackedScene
 @export var stone_scene: PackedScene
 @export var trampoline_scene: PackedScene
 @export var game_controller: Node2D
@@ -27,7 +28,7 @@ var seq_id = 0
 var seq_step = 0
 
 # spell 0 = fireball
-var spell_0_collected = false
+var spell_0_collected = true
 
 # spell 1 = trampoline
 var spell_1_collected = false
@@ -39,6 +40,8 @@ var active_spell = 0
 var active_trampoline = null
 
 var health = 3
+
+var anim_override_timer = 0.0
 
 func damage(amount: int):
 	if health == 0:
@@ -84,10 +87,13 @@ func set_dead_sprite():
 
 func collect_spell(spell: int):
 	if spell == 0:
+		print("Fireball collected")
 		spell_0_collected = true
 	elif spell == 1:
+		print("Trampoline collected")
 		spell_1_collected = true
 	elif spell == 2:
+		print("Stone collected")
 		spell_2_collected = true
 
 func _ready():
@@ -111,12 +117,26 @@ func _process(delta):
 
 func _physics_process(delta):
 	
+	if anim_override_timer > 0.0:
+		anim_override_timer -= delta
+	
 	# Spellcasting
 	if controls_enabled and Input.is_action_just_pressed("action"):
 		print("Pressed action; active spell = " + str(active_spell))
 		if active_spell == 0 and spell_0_collected:
-			# TODO Fireball casting spell
-			pass
+			# Fireball casting spell
+			var fireball = fireball_scene.instantiate()
+			fireball.player = self
+			if facing_right:
+				fireball.position = position + Vector2(16.0, 5.0)
+				fireball.linear_velocity = Vector2(400.0, 0.0)
+			else:
+				fireball.position = position + Vector2(-16.0, 5.0)
+				fireball.linear_velocity = Vector2(-400.0, 0.0)
+			
+			get_parent().get_node("Items").add_child(fireball)
+			$MainSprite.play("summon")
+			anim_override_timer = 0.25
 		elif active_spell == 1 and spell_1_collected:
 			print("Trying to spawn a trampoline...")
 			# Trampoline
@@ -136,6 +156,8 @@ func _physics_process(delta):
 				trampoline_spawn_timer = TRAMPOLINE_CAST_TIME
 				active_trampoline = trampoline
 				
+				$MainSprite.play("summon")
+			anim_override_timer = 0.25
 		elif active_spell == 2 and spell_2_collected:
 			if stone_spawn_timer <= 0:
 				var stone = stone_scene.instantiate()
@@ -146,6 +168,9 @@ func _physics_process(delta):
 					stone.position = position - $StoneSpawnArea.position
 				get_parent().get_node("Items").add_child(stone)
 				stone_spawn_timer = STONE_CAST_TIME
+				
+				$MainSprite.play("summon")
+				anim_override_timer = 0.25
 	
 	if stone_spawn_timer > 0.0:
 		stone_spawn_timer -= delta
@@ -183,7 +208,7 @@ func _physics_process(delta):
 
 	move_and_slide()
 	
-	if controls_enabled:
+	if controls_enabled and anim_override_timer <= 0.0:
 		if is_on_floor():
 			if abs(velocity.x) > 1.0:
 				$MainSprite.play("walk")

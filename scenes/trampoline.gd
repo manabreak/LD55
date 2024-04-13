@@ -21,7 +21,7 @@ func destroy():
 	collision_layer = 0
 	collision_mask = 0
 	player.active_trampoline = null
-	apply_impulse(Vector2(randf_range(-50.0, 50.0), -200.0))
+	apply_impulse(Vector2(randf_range(-50.0, 50.0), -0.0))
 	var tween = get_tree().create_tween()
 	var rotation_amount = randf_range(-60.0, 60.0)
 	var rotation_time = abs(rotation_amount / 5.0)
