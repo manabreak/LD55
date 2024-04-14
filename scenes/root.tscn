@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://q5wm8qy8vfkj"]
+[gd_scene load_steps=40 format=3 uid="uid://q5wm8qy8vfkj"]
 
 [ext_resource type="Texture2D" uid="uid://bboe16dw6ucw" path="res://assets/lava.png" id="1_2bh0f"]
 [ext_resource type="Script" path="res://scenes/GameController.gd" id="1_td7vl"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://cnpbwrbrsa7lf" path="res://assets/boss_frog.png" id="11_sb3bh"]
 [ext_resource type="Script" path="res://scenes/BossFrog.gd" id="12_37afk"]
 [ext_resource type="PackedScene" uid="uid://domrkmmu4k4os" path="res://scenes/door.tscn" id="13_mli1d"]
+[ext_resource type="Texture2D" uid="uid://dv1c83qlw2qjp" path="res://assets/golden_frog.png" id="13_rtvcj"]
+[ext_resource type="Script" path="res://scenes/GoldenFrog.gd" id="14_0ukho"]
 [ext_resource type="Script" path="res://scenes/LavaPool.gd" id="14_2nemk"]
 [ext_resource type="PackedScene" uid="uid://cxvk0gga1kjrx" path="res://scenes/bubble.tscn" id="14_umt66"]
 [ext_resource type="Texture2D" uid="uid://dsa040m4ksaeu" path="res://assets/circle_16px.png" id="20_m4n2w"]
@@ -754,6 +756,7 @@ format = 2
 layer_0/tile_data = PackedInt32Array(-327679, 65536, 1, -262143, 65536, 2, -327678, 131072, 1, -262142, 131072, 2, -327677, 65536, 1, -262141, 65536, 2, -327676, 131072, 1, -262140, 131072, 2, -327675, 65536, 1, -262139, 65536, 2, -327674, 131072, 1, -262138, 131072, 2, -327673, 65536, 1, -262137, 65536, 2, -327672, 131072, 1, -262136, 131072, 2, -327671, 65536, 1, -262135, 65536, 2, -327670, 131072, 1, -262134, 131072, 2, -327669, 65536, 1, -262133, 65536, 2, -327668, 131072, 1, -262132, 131072, 2, -327667, 65536, 1, -262131, 65536, 2, -327666, 131072, 1, -262130, 131072, 2, -327665, 65536, 1, -262129, 65536, 2, -327664, 131072, 1, -262128, 131072, 2, -196607, 65536, 1, -131071, 65536, 2, -196606, 131072, 1, -131070, 131072, 2, -196605, 65536, 1, -131069, 65536, 2, -196604, 131072, 1, -131068, 131072, 2, -196603, 65536, 1, -131067, 65536, 2, -196602, 131072, 1, -131066, 131072, 2, -196601, 65536, 1, -131065, 65536, 2, -196600, 131072, 1, -131064, 131072, 2, -196599, 65536, 1, -131063, 65536, 2, -196598, 131072, 1, -131062, 131072, 2, -196597, 65536, 1, -131061, 65536, 2, -196596, 131072, 1, -131060, 131072, 2, -196595, 65536, 1, -131059, 65536, 2, -196594, 131072, 1, -131058, 131072, 2, -196593, 65536, 1, -131057, 65536, 2, -196592, 131072, 1, -131056, 131072, 2, -196591, 65536, 1, -131055, 65536, 2, -196590, 131072, 1, -131054, 131072, 2, -65519, 65536, 1, 17, 65536, 2, -65518, 131072, 1, 18, 131072, 2, -65521, 65536, 1, 15, 65536, 2, -65520, 131072, 1, 16, 131072, 2, -65523, 65536, 1, 13, 65536, 2, -65522, 131072, 1, 14, 131072, 2, -65525, 65536, 1, 11, 65536, 2, -65524, 131072, 1, 12, 131072, 2, -65527, 65536, 1, 9, 65536, 2, -65526, 131072, 1, 10, 131072, 2, -65529, 65536, 1, 7, 65536, 2, -65528, 131072, 1, 8, 131072, 2, -65531, 65536, 1, 5, 65536, 2, -65530, 131072, 1, 6, 131072, 2, -65533, 65536, 1, 3, 65536, 2, -65532, 131072, 1, 4, 131072, 2, -65535, 65536, 1, 1, 65536, 2, -65534, 131072, 1, 2, 131072, 2, -1, 65536, 1, 65535, 65536, 2, -65536, 131072, 1, 0, 131072, 2, -131073, 65536, 1, -65537, 65536, 2, -196608, 131072, 1, -131072, 131072, 2, 65537, 65536, 1, 131073, 65536, 2, 65538, 131072, 1, 131074, 131072, 2, 65539, 65536, 1, 131075, 65536, 2, 65540, 131072, 1, 131076, 131072, 2, 65541, 65536, 1, 131077, 65536, 2, 65542, 131072, 1, 131078, 131072, 2, 65543, 65536, 1, 131079, 65536, 2, 65544, 131072, 1, 131080, 131072, 2, 65545, 65536, 1, 131081, 65536, 2, 65546, 131072, 1, 131082, 131072, 2, 65547, 65536, 1, 131083, 65536, 2, 65548, 131072, 1, 131084, 131072, 2, 65549, 65536, 1, 131085, 65536, 2, 65550, 131072, 1, 131086, 131072, 2, 65551, 65536, 1, 131087, 65536, 2, 65552, 131072, 1, 131088, 131072, 2, -589742, 0, 8, -524206, 0, 9, -458670, 0, 10, -589741, 65536, 8, -524205, 65536, 9, -458669, 65536, 10)
 
 [node name="Player" parent="." node_paths=PackedStringArray("game_controller", "gui") instance=ExtResource("3_1m7f5")]
+position = Vector2(87, 31)
 game_controller = NodePath("..")
 gui = NodePath("../GUI")
 
@@ -797,7 +800,7 @@ player = NodePath("../../Player")
 position = Vector2(896, -182)
 shape = SubResource("RectangleShape2D_ggxqo")
 
-[node name="BossFrog" type="AnimatedSprite2D" parent="Items" node_paths=PackedStringArray("player")]
+[node name="BossFrog" type="AnimatedSprite2D" parent="Items" node_paths=PackedStringArray("player", "golden_frog", "golden_frog_particles", "golden_frog_light")]
 texture_filter = 1
 position = Vector2(184, 33)
 sprite_frames = SubResource("SpriteFrames_6s7ln")
@@ -805,6 +808,9 @@ animation = &"summon"
 flip_h = true
 script = ExtResource("12_37afk")
 player = NodePath("../../Player")
+golden_frog = NodePath("../GoldenFrog")
+golden_frog_particles = NodePath("../GoldenFrogParticles")
+golden_frog_light = NodePath("../PointLight2D")
 
 [node name="Bubble" parent="Items/BossFrog" instance=ExtResource("14_umt66")]
 z_index = 5
@@ -833,6 +839,30 @@ position = Vector2(523, -209)
 position = Vector2(544, -33)
 move_distance = 48.0
 
+[node name="GoldenFrog" type="Sprite2D" parent="Items"]
+position = Vector2(136, -32)
+texture = ExtResource("13_rtvcj")
+script = ExtResource("14_0ukho")
+
+[node name="GoldenFrogParticles" type="GPUParticles2D" parent="Items"]
+texture_filter = 1
+position = Vector2(136, -32)
+emitting = false
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_cthkn")
+texture = ExtResource("20_m4n2w")
+lifetime = 0.95
+one_shot = true
+speed_scale = 1.21
+explosiveness = 0.91
+randomness = 0.2
+
+[node name="PointLight2D" type="PointLight2D" parent="Items"]
+position = Vector2(136, -32)
+energy = 0.7
+texture = ExtResource("8_c75he")
+texture_scale = 1.5
+
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
 tile_set = SubResource("TileSet_wa3v4")
@@ -849,6 +879,7 @@ texture = ExtResource("8_c75he")
 color = Color(0.2, 0.270588, 0.278431, 1)
 
 [node name="GUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("game_controller")]
+visible = false
 script = ExtResource("9_g3b6s")
 game_controller = NodePath("..")
 

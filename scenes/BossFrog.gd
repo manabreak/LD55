@@ -7,12 +7,21 @@ var seq_step = 0
 @export
 var player: CharacterBody2D
 
+@export
+var golden_frog: Sprite2D
+
+@export
+var golden_frog_particles: GPUParticles2D
+
+@export
+var golden_frog_light: PointLight2D
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	play("idle")
 	# TODO Swap these!
-	# do_intro_sequence()
-	MusicController.play_main_music()
+	do_intro_sequence()
+	# MusicController.play_main_music()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,6 +32,8 @@ func _process(delta):
 func do_intro_sequence():
 	seq_id = 0
 	seq_step = 0
+	golden_frog.modulate.a = 0.0
+	# golden_frog_light.energy = 0.7
 	MusicController.play_summoning_music()
 	player.controls_enabled = false
 	$Bubble.text_visible.connect(_on_text_visible)
@@ -46,7 +57,10 @@ func _do_next_seq_step():
 		elif seq_step == 4:
 			$Bubble.visible = false
 			play("summon")
-			# TODO Play summoning music, do effects etc.
+			# Do summoning effects
+			var artefact_tween = get_tree().create_tween()
+			artefact_tween.tween_property(golden_frog, "modulate:a", 1.0, 10.0)
+			artefact_tween.tween_property(golden_frog_light, "energy", 0.7, 10.0)
 			
 			var timer = get_tree().create_timer(10.0)
 			timer.timeout.connect(_do_next_seq_step)
@@ -61,6 +75,10 @@ func _do_next_seq_step():
 		elif seq_step == 8:
 			$Bubble.visible = false
 			# Boss frog away!
+			golden_frog.queue_free()
+			golden_frog_light.queue_free()
+			golden_frog_particles.emitting = true
+			
 			var particles = $StoneSpawnParticles
 			particles.reparent(get_parent())
 			particles.emitting = true
