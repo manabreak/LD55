@@ -6,7 +6,7 @@ var lost_heart_color = Color(0.45, 0.45, 0.45, 1.0)
 var game_controller: Node2D
 
 @onready
-var hearts = $InGameUI/HeartsContainer/Hearts
+var hearts = $InGameUI/UIContainer/HeartsContainer/Hearts
 
 @onready
 var spell_info_container = $SpellInfoMainContainer
@@ -19,6 +19,7 @@ var health = 3
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$ColorRect.visible = true
+	GlobalController.fadeout = $ColorRect
 	visible = true
 	spell_info_container.visible = true
 	spell_info_container.modulate.a = 0.0

@@ -11,17 +11,23 @@ var player = $Player
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if current_level == "root":
+		GlobalController.reset_health()
 		GlobalController.spells[0] = false
 		GlobalController.spells[1] = false
 		GlobalController.spells[2] = false
 	if current_level == "root_2":
+		GlobalController.reset_health()
 		GlobalController.spells[0] = true
 		GlobalController.spells[1] = true
 		GlobalController.spells[2] = false
+		GlobalController.set_active_spell(0)
+		MusicController.play_main_music()
 	if current_level == "root_3":
+		GlobalController.reset_health()
 		GlobalController.spells[0] = true
 		GlobalController.spells[1] = true
 		GlobalController.spells[2] = true
+		GlobalController.set_active_spell(0)
 		MusicController.stop_music()
 	
 	$GUI.get_node("EndGameUI").visible = false
