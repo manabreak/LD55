@@ -37,7 +37,9 @@ func damage(amount: int):
 	
 	if take_damage_timer > 0.0:
 		return
+		
 	take_damage_timer = 1.0
+	$DamageSound.play()
 	
 	$MainSprite.modulate = Color(1.0, 0.3, 0.3, 1.0)
 	var damage_effect_tween = get_tree().create_tween()
@@ -75,6 +77,7 @@ func kill():
 
 func do_die():
 	print("Handling dying logic")
+	$DeathSound.play()
 	controls_enabled = false
 	$MainSprite.play("take_hit")
 	velocity.x = 0.0
@@ -161,6 +164,7 @@ func _physics_process(delta):
 				else:
 					up_direction = Vector2(0, 1)
 				gravity = -gravity
+				$GravitySound.play()
 				$MainSprite.flip_v = not $MainSprite.flip_v
 				if $MainSprite.flip_v:
 					$MainSprite.position.y = 9

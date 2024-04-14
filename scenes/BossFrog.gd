@@ -33,7 +33,7 @@ func do_intro_sequence():
 	seq_id = 0
 	seq_step = 0
 	golden_frog.modulate.a = 0.0
-	# golden_frog_light.energy = 0.7
+	golden_frog_light.energy = 0.0
 	MusicController.play_summoning_music()
 	player.controls_enabled = false
 	$Bubble.text_visible.connect(_on_text_visible)
@@ -59,8 +59,8 @@ func _do_next_seq_step():
 			play("summon")
 			# Do summoning effects
 			var artefact_tween = get_tree().create_tween()
-			artefact_tween.tween_property(golden_frog, "modulate:a", 1.0, 10.0)
-			artefact_tween.tween_property(golden_frog_light, "energy", 0.7, 10.0)
+			artefact_tween.tween_property(golden_frog, "modulate:a", 1.0, 10.0).set_delay(0.5)
+			artefact_tween.tween_property(golden_frog_light, "energy", 0.9, 5.0).set_delay(2.5)
 			
 			var timer = get_tree().create_timer(10.0)
 			timer.timeout.connect(_do_next_seq_step)

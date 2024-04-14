@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://c3ygqroegba0g"]
+[gd_scene load_steps=12 format=3 uid="uid://c3ygqroegba0g"]
 
 [ext_resource type="Script" path="res://scenes/magic_missile.gd" id="1_74n3o"]
 [ext_resource type="Texture2D" uid="uid://dm7io18854c4i" path="res://assets/white_x_16px.png" id="1_yq1xm"]
+[ext_resource type="AudioStream" uid="uid://dn1jgxfcelg3n" path="res://assets/sfx/woosh07.wav" id="3_xy75o"]
 
 [sub_resource type="Curve" id="Curve_ws2nf"]
 _data = [Vector2(0, 0.995815), 0.0, 0.0, 0, 0, Vector2(0.994728, 0.00804889), -2.68881, 0.0, 0, 0]
@@ -54,6 +55,9 @@ lifetime = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_bohfv")
+
+[node name="SpawnSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_xy75o")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

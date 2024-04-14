@@ -1,8 +1,12 @@
-[gd_scene load_steps=28 format=3 uid="uid://cuec2paulpx"]
+[gd_scene load_steps=37 format=3 uid="uid://cuec2paulpx"]
 
 [ext_resource type="Script" path="res://scenes/GameController.gd" id="1_urwih"]
 [ext_resource type="Texture2D" uid="uid://bxtfpn1ykgxll" path="res://assets/tileset.png" id="2_jjtt8"]
 [ext_resource type="PackedScene" uid="uid://dohr4etj001h8" path="res://scenes/player.tscn" id="3_b6n3x"]
+[ext_resource type="AudioStream" uid="uid://kyhxgtiunuoi" path="res://assets/sfx/pew02.wav" id="8_g3n2j"]
+[ext_resource type="Texture2D" uid="uid://dsa040m4ksaeu" path="res://assets/circle_16px.png" id="9_gw71s"]
+[ext_resource type="Texture2D" uid="uid://dv1c83qlw2qjp" path="res://assets/golden_frog.png" id="10_tud4y"]
+[ext_resource type="Script" path="res://scenes/GoldenFrog.gd" id="11_dx7u5"]
 [ext_resource type="Texture2D" uid="uid://bkqybrko7urn8" path="res://assets/circle_blur_64.png" id="13_1whqy"]
 [ext_resource type="Script" path="res://scenes/BossFight.gd" id="14_gjm3e"]
 [ext_resource type="PackedScene" uid="uid://c3ygqroegba0g" path="res://scenes/magic_missile.tscn" id="15_fpjf0"]
@@ -172,6 +176,38 @@ animations = [{
 "name": &"levitate",
 "speed": 5.0
 }]
+
+[sub_resource type="Curve" id="Curve_ji22c"]
+_data = [Vector2(0, 1), 0.0, -0.460939, 0, 0, Vector2(0.996485, 0.00386345), 0.0449342, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dlkbq"]
+texture_mode = 1
+curve = SubResource("Curve_ji22c")
+
+[sub_resource type="Curve" id="Curve_31i6m"]
+_data = [Vector2(0.00351494, 0.987444), 0.0, 7.03115, 0, 0, Vector2(1, 0.317772), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_e05vg"]
+curve = SubResource("Curve_31i6m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_imw1s"]
+particle_flag_disable_z = true
+spread = 180.0
+flatness = 0.812
+initial_velocity_min = 23.42
+initial_velocity_max = 33.36
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = -37.58
+tangential_accel_max = 34.23
+damping_min = 25.505
+damping_max = 62.416
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_e05vg")
+alpha_curve = SubResource("CurveTexture_dlkbq")
+hue_variation_min = -0.39
+hue_variation_max = 0.84
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6kumb"]
 texture = ExtResource("20_lulhe")
@@ -724,7 +760,7 @@ size = Vector2(481, 222)
 
 [node name="Root" type="Node2D"]
 script = ExtResource("1_urwih")
-current_level = "root"
+current_level = "root_3"
 
 [node name="BackgroundTilemap" type="TileMap" parent="."]
 modulate = Color(0.372549, 0.388235, 0.27451, 1)
@@ -766,7 +802,7 @@ position = Vector2(-21, 63)
 
 [node name="Items" type="Node2D" parent="."]
 
-[node name="Boss" type="Area2D" parent="Items" node_paths=PackedStringArray("move_targets", "player")]
+[node name="Boss" type="Area2D" parent="Items" node_paths=PackedStringArray("move_targets", "player", "golden_frog")]
 position = Vector2(764, -327)
 collision_layer = 16
 collision_mask = 9
@@ -774,6 +810,7 @@ script = ExtResource("14_gjm3e")
 magic_missile_scene = ExtResource("15_fpjf0")
 move_targets = NodePath("../../BossMoveTargets")
 player = NodePath("../../Player")
+golden_frog = NodePath("../GoldenFrog")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Items/Boss"]
 position = Vector2(0, 5)
@@ -789,6 +826,49 @@ position = Vector2(1, 4)
 color = Color(0.905882, 0.52549, 0.898039, 1)
 texture = ExtResource("13_1whqy")
 texture_scale = 2.25
+
+[node name="HitSound" type="AudioStreamPlayer" parent="Items/Boss"]
+stream = ExtResource("8_g3n2j")
+volume_db = -1.0
+
+[node name="StoneSpawnParticles" type="GPUParticles2D" parent="Items/Boss"]
+texture_filter = 1
+position = Vector2(1, 4)
+emitting = false
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_imw1s")
+texture = ExtResource("9_gw71s")
+lifetime = 0.95
+one_shot = true
+speed_scale = 1.21
+explosiveness = 0.91
+randomness = 0.2
+
+[node name="GoldenFrog" type="Sprite2D" parent="Items"]
+visible = false
+position = Vector2(672, -360)
+texture = ExtResource("10_tud4y")
+script = ExtResource("11_dx7u5")
+
+[node name="StoneSpawnParticles" type="GPUParticles2D" parent="Items/GoldenFrog"]
+texture_filter = 1
+position = Vector2(1, 4)
+emitting = false
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_imw1s")
+texture = ExtResource("9_gw71s")
+lifetime = 0.95
+one_shot = true
+speed_scale = 1.21
+explosiveness = 0.91
+randomness = 0.2
+
+[node name="GoldenFrogLight" type="PointLight2D" parent="Items/GoldenFrog"]
+position = Vector2(0, -1)
+enabled = false
+energy = 0.7
+texture = ExtResource("13_1whqy")
+texture_scale = 4.39
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
@@ -938,11 +1018,12 @@ offset_bottom = 1981.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="BossSensor" type="Area2D" parent="." node_paths=PackedStringArray("player")]
+[node name="BossSensor" type="Area2D" parent="." node_paths=PackedStringArray("player", "boss")]
 visible = false
 position = Vector2(672, -369)
 script = ExtResource("21_x4ul0")
 player = NodePath("../Player")
+boss = NodePath("../Items/Boss")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossSensor"]
 position = Vector2(-0.5, 1)

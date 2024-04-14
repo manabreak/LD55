@@ -10,6 +10,20 @@ var player = $Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if current_level == "root":
+		GlobalController.spells[0] = false
+		GlobalController.spells[1] = false
+		GlobalController.spells[2] = false
+	if current_level == "root_2":
+		GlobalController.spells[0] = true
+		GlobalController.spells[1] = true
+		GlobalController.spells[2] = false
+	if current_level == "root_3":
+		GlobalController.spells[0] = true
+		GlobalController.spells[1] = true
+		GlobalController.spells[2] = true
+		MusicController.stop_music()
+	
 	$GUI.get_node("EndGameUI").visible = false
 	var tween = get_tree().create_tween()
 	tween.tween_property($GUI/ColorRect, "modulate:a", 0.0, 2.0)
@@ -23,7 +37,7 @@ func _process(delta):
 
 func restart():
 	print("Restarting...")
-	get_tree().change_scene_to_file("res://scenes/root.tscn")
+	get_tree().change_scene_to_file("res://scenes/" + current_level + ".tscn")
 	# TODO nice fades etc.
 
 func fade_level_out():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dohr4etj001h8"]
+[gd_scene load_steps=36 format=3 uid="uid://dohr4etj001h8"]
 
 [ext_resource type="Script" path="res://scenes/Player.gd" id="1_qws6w"]
 [ext_resource type="PackedScene" uid="uid://uq02y38kyo8t" path="res://scenes/stone.tscn" id="2_c7pte"]
@@ -12,6 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://cxvk0gga1kjrx" path="res://scenes/bubble.tscn" id="10_jrlrr"]
 [ext_resource type="Texture2D" uid="uid://bkqybrko7urn8" path="res://assets/circle_blur_64.png" id="11_7u1fq"]
 [ext_resource type="AudioStream" uid="uid://cmkjl701ux64r" path="res://assets/sfx/jump01.wav" id="12_xxlf4"]
+[ext_resource type="AudioStream" uid="uid://bo7b7n0gy1abv" path="res://assets/sfx/pew06.wav" id="13_6au6c"]
+[ext_resource type="AudioStream" uid="uid://diq8ssc4juq47" path="res://assets/sfx/ohno.wav" id="14_54n7t"]
+[ext_resource type="AudioStream" uid="uid://dn5nnguen4xgd" path="res://assets/sfx/woosh01.wav" id="14_jkc8e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0b7i8"]
 radius = 7.0
@@ -178,14 +181,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7udie"]
 size = Vector2(16, 16)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("game_controller", "gui")]
+[node name="Player" type="CharacterBody2D"]
 position = Vector2(270, -234)
 collision_mask = 5
 script = ExtResource("1_qws6w")
 stone_scene = ExtResource("2_c7pte")
 trampoline_scene = ExtResource("3_skjov")
-game_controller = NodePath("")
-gui = NodePath("")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 4)
@@ -226,3 +227,14 @@ position = Vector2(27, 7)
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_xxlf4")
+
+[node name="DamageSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_6au6c")
+
+[node name="GravitySound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_jkc8e")
+volume_db = -3.0
+pitch_scale = 1.15
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_54n7t")

@@ -15,3 +15,11 @@ func play_summoning_music():
 
 func play_main_music():
 	$MainMusic.play()
+
+func play_boss_music():
+	$BossMusic.play()
+
+func stop_music():
+	$SummoningMusic.stop()
+	$MainMusic.stop()
+	$BossMusic.stop()

@@ -3,6 +3,9 @@ extends Area2D
 @export
 var player: CharacterBody2D
 
+@export
+var boss: Node2D
+
 var camera = null
 
 # Called when the node enters the scene tree for the first time.
@@ -19,7 +22,9 @@ func _process(delta):
 
 func _on_body_entered(body):
 	if camera == null and body == player:
+		print("Player entered the boss fight!")
 		camera = player.get_node("Camera2D")
 		camera.reparent(self)
 		camera.position_smoothing_enabled = false
-		
+		MusicController.play_boss_music()
+		boss.start_fight()

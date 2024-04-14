@@ -56,4 +56,5 @@ stretch_mode = 5
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_jsdbx")
+volume_db = -3.0
 autoplay = true
