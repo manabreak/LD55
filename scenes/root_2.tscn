@@ -1,18 +1,8 @@
-[gd_scene load_steps=52 format=3 uid="uid://8dh8scb6pvx4"]
+[gd_scene load_steps=22 format=3 uid="uid://8dh8scb6pvx4"]
 
 [ext_resource type="Script" path="res://scenes/GameController.gd" id="1_4rpmu"]
 [ext_resource type="Texture2D" uid="uid://bxtfpn1ykgxll" path="res://assets/tileset.png" id="2_y3ynd"]
-[ext_resource type="Script" path="res://scenes/Player.gd" id="3_i1d2u"]
-[ext_resource type="PackedScene" uid="uid://uq02y38kyo8t" path="res://scenes/stone.tscn" id="5_tambd"]
-[ext_resource type="PackedScene" uid="uid://b5kwm2yaphkln" path="res://scenes/trampoline.tscn" id="6_pr08h"]
-[ext_resource type="Texture2D" uid="uid://dxsoocj2l2rge" path="res://assets/player_dead.png" id="7_gupkg"]
-[ext_resource type="Texture2D" uid="uid://ileoor2cjtbe" path="res://assets/player_idle.png" id="8_htdvd"]
-[ext_resource type="Texture2D" uid="uid://diarqkujldgjf" path="res://assets/player_jump.png" id="9_4hshi"]
-[ext_resource type="Texture2D" uid="uid://cqfp1c8035oc8" path="res://assets/player_cast.png" id="10_lbafo"]
-[ext_resource type="Texture2D" uid="uid://hp7nkbpwre1q" path="res://assets/player_hit.png" id="11_nykcr"]
-[ext_resource type="Texture2D" uid="uid://csvv1e52ckm5k" path="res://assets/player_walk.png" id="12_0vbbi"]
-[ext_resource type="PackedScene" uid="uid://cxvk0gga1kjrx" path="res://scenes/bubble.tscn" id="13_jq8fa"]
-[ext_resource type="Texture2D" uid="uid://bkqybrko7urn8" path="res://assets/circle_blur_64.png" id="14_qma6t"]
+[ext_resource type="PackedScene" uid="uid://dohr4etj001h8" path="res://scenes/player.tscn" id="3_7fhfx"]
 [ext_resource type="PackedScene" uid="uid://dhgy354ndntpr" path="res://scenes/book.tscn" id="15_7fxoi"]
 [ext_resource type="PackedScene" uid="uid://domrkmmu4k4os" path="res://scenes/door.tscn" id="16_fmjsf"]
 [ext_resource type="Script" path="res://scenes/LavaPool.gd" id="17_vt1gh"]
@@ -133,171 +123,6 @@ texture = ExtResource("2_y3ynd")
 
 [sub_resource type="TileSet" id="TileSet_khmyx"]
 sources/0 = SubResource("TileSetAtlasSource_jjy2f")
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0b7i8"]
-radius = 7.0
-height = 22.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eyu6y"]
-atlas = ExtResource("8_htdvd")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o8436"]
-atlas = ExtResource("8_htdvd")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_knaia"]
-atlas = ExtResource("9_4hshi")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_waj08"]
-atlas = ExtResource("9_4hshi")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pww7r"]
-atlas = ExtResource("9_4hshi")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p1viy"]
-atlas = ExtResource("10_lbafo")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1rwkx"]
-atlas = ExtResource("10_lbafo")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ly1hb"]
-atlas = ExtResource("10_lbafo")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ety8h"]
-atlas = ExtResource("10_lbafo")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_v6w50"]
-atlas = ExtResource("12_0vbbi")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ofsfj"]
-atlas = ExtResource("12_0vbbi")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3x5hc"]
-atlas = ExtResource("12_0vbbi")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3k0m5"]
-atlas = ExtResource("12_0vbbi")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p7vj0"]
-atlas = ExtResource("12_0vbbi")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x06ej"]
-atlas = ExtResource("12_0vbbi")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5a8l1"]
-atlas = ExtResource("12_0vbbi")
-region = Rect2(192, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8xk6o"]
-atlas = ExtResource("12_0vbbi")
-region = Rect2(224, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_kwwf4"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("7_gupkg")
-}],
-"loop": true,
-"name": &"dead",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_eyu6y")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_o8436")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_knaia")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_waj08")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pww7r")
-}],
-"loop": true,
-"name": &"jump",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p1viy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1rwkx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ly1hb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ety8h")
-}],
-"loop": true,
-"name": &"summon",
-"speed": 11.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("11_nykcr")
-}],
-"loop": true,
-"name": &"take_hit",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_v6w50")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ofsfj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3x5hc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3k0m5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p7vj0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x06ej")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5a8l1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8xk6o")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 12.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7udie"]
-size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ggxqo"]
 size = Vector2(176.75, 28)
@@ -858,51 +683,9 @@ tile_set = SubResource("TileSet_khmyx")
 format = 2
 layer_0/tile_data = PackedInt32Array(-327679, 65536, 1, -262143, 65536, 2, -327678, 131072, 1, -262142, 131072, 2, -327677, 65536, 1, -262141, 65536, 2, -327676, 131072, 1, -262140, 131072, 2, -327675, 65536, 1, -262139, 65536, 2, -327674, 131072, 1, -262138, 131072, 2, -327673, 65536, 1, -262137, 65536, 2, -327672, 131072, 1, -262136, 131072, 2, -327671, 65536, 1, -262135, 65536, 2, -327670, 131072, 1, -262134, 131072, 2, -327669, 65536, 1, -262133, 65536, 2, -327668, 131072, 1, -262132, 131072, 2, -327667, 65536, 1, -262131, 65536, 2, -327666, 131072, 1, -262130, 131072, 2, -327665, 65536, 1, -262129, 65536, 2, -327664, 131072, 1, -262128, 131072, 2, -196607, 65536, 1, -131071, 65536, 2, -196606, 131072, 1, -131070, 131072, 2, -196605, 65536, 1, -131069, 65536, 2, -196604, 131072, 1, -131068, 131072, 2, -196603, 65536, 1, -131067, 65536, 2, -196602, 131072, 1, -131066, 131072, 2, -196601, 65536, 1, -131065, 65536, 2, -196600, 131072, 1, -131064, 131072, 2, -196599, 65536, 1, -131063, 65536, 2, -196598, 131072, 1, -131062, 131072, 2, -196597, 65536, 1, -131061, 65536, 2, -196596, 131072, 1, -131060, 131072, 2, -196595, 65536, 1, -131059, 65536, 2, -196594, 131072, 1, -131058, 131072, 2, -196593, 65536, 1, -131057, 65536, 2, -196592, 131072, 1, -131056, 131072, 2, -196591, 65536, 1, -131055, 65536, 2, -196590, 131072, 1, -131054, 131072, 2, -65519, 65536, 1, 17, 65536, 2, -65518, 131072, 1, 18, 131072, 2, -65521, 65536, 1, 15, 65536, 2, -65520, 131072, 1, 16, 131072, 2, -65523, 65536, 1, 13, 65536, 2, -65522, 131072, 1, 14, 131072, 2, -65525, 65536, 1, 11, 65536, 2, -65524, 131072, 1, 12, 131072, 2, -65527, 65536, 1, 9, 65536, 2, -65526, 131072, 1, 10, 131072, 2, -65529, 65536, 1, 7, 65536, 2, -65528, 131072, 1, 8, 131072, 2, -65531, 65536, 1, 5, 65536, 2, -65530, 131072, 1, 6, 131072, 2, -65533, 65536, 1, 3, 65536, 2, -65532, 131072, 1, 4, 131072, 2, -65535, 65536, 1, 1, 65536, 2, -65534, 131072, 1, 2, 131072, 2, -1, 65536, 1, 65535, 65536, 2, -65536, 131072, 1, 0, 131072, 2, -131073, 65536, 1, -65537, 65536, 2, -196608, 131072, 1, -131072, 131072, 2, 65537, 65536, 1, 131073, 65536, 2, 65538, 131072, 1, 131074, 131072, 2, 65539, 65536, 1, 131075, 65536, 2, 65540, 131072, 1, 131076, 131072, 2, 65541, 65536, 1, 131077, 65536, 2, 65542, 131072, 1, 131078, 131072, 2, 65543, 65536, 1, 131079, 65536, 2, 65544, 131072, 1, 131080, 131072, 2, 65545, 65536, 1, 131081, 65536, 2, 65546, 131072, 1, 131082, 131072, 2, 65547, 65536, 1, 131083, 65536, 2, 65548, 131072, 1, 131084, 131072, 2, 65549, 65536, 1, 131085, 65536, 2, 65550, 131072, 1, 131086, 131072, 2, 65551, 65536, 1, 131087, 65536, 2, 65552, 131072, 1, 131088, 131072, 2, -589742, 0, 8, -524206, 0, 9, -458670, 0, 10, -589741, 65536, 8, -524205, 65536, 9, -458669, 65536, 10, -655255, 0, 8, -589719, 0, 9, -524183, 0, 10, -655254, 65536, 8, -589718, 65536, 9, -524182, 65536, 10)
 
-[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("game_controller", "gui")]
-position = Vector2(969, -226)
-collision_mask = 5
-script = ExtResource("3_i1d2u")
-stone_scene = ExtResource("5_tambd")
-trampoline_scene = ExtResource("6_pr08h")
+[node name="Player" parent="." node_paths=PackedStringArray("game_controller", "gui") instance=ExtResource("3_7fhfx")]
 game_controller = NodePath("..")
 gui = NodePath("../GUI")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(-1, 4)
-shape = SubResource("CapsuleShape2D_0b7i8")
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(3, 3)
-limit_left = -48
-limit_bottom = 96
-position_smoothing_enabled = true
-
-[node name="MainSprite" type="AnimatedSprite2D" parent="Player"]
-texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_kwwf4")
-animation = &"idle"
-
-[node name="StoneSpawnArea" type="Area2D" parent="Player"]
-position = Vector2(18, 7)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/StoneSpawnArea"]
-shape = SubResource("RectangleShape2D_7udie")
-
-[node name="Bubble" parent="Player" instance=ExtResource("13_jq8fa")]
-visible = false
-z_index = 5
-offset_left = -103.0
-offset_top = -97.0
-offset_right = 25.0
-offset_bottom = -33.0
-
-[node name="PointLight2D2" type="PointLight2D" parent="Player"]
-blend_mode = 2
-texture = ExtResource("14_qma6t")
-texture_scale = 3.52
-
-[node name="TrampolineSpawnPoint" type="Node2D" parent="Player"]
-position = Vector2(27, 7)
 
 [node name="Items" type="Node2D" parent="."]
 
@@ -1278,6 +1061,15 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 text = "You found a spellbook!"
 horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="GUI"]
+visible = false
+offset_left = -19.0
+offset_top = -19.0
+offset_right = 1981.0
+offset_bottom = 1981.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
 [connection signal="body_entered" from="Items/LavaPool" to="Items/LavaPool" method="_on_body_entered"]
 [connection signal="body_entered" from="Items/LavaPool2" to="Items/LavaPool2" method="_on_body_entered"]

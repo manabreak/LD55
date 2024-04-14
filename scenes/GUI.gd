@@ -18,6 +18,7 @@ var health = 3
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$ColorRect.visible = true
 	visible = true
 	spell_info_container.visible = true
 	spell_info_container.modulate.a = 0.0

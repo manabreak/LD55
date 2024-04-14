@@ -185,6 +185,7 @@ func _physics_process(delta):
 		else:
 			velocity.y = -JUMP_VELOCITY_INITIAL
 		jump_timer = JUMP_APPLY_TIME
+		$JumpSound.play()
 	elif controls_enabled and Input.is_action_pressed("jump") and jump_timer > 0:
 		if gravity_down:
 			velocity.y += JUMP_APPLY_FORCE * jump_timer
@@ -225,7 +226,7 @@ func launch_with_trampoline():
 	jump_timer = 0
 
 func say_ribbit():
-	var timer = get_tree().create_timer(1.0)
+	var timer = get_tree().create_timer(1.5)
 	timer.timeout.connect(say_ribbit_after_delay)
 	
 
@@ -233,7 +234,7 @@ func say_ribbit_after_delay():
 	$Bubble.display_text("*Ribbit*", 0.4)
 
 func _on_text_visible():
-	var timer = get_tree().create_timer(2.0)
+	var timer = get_tree().create_timer(1.0)
 	timer.timeout.connect(_do_next_seq_step)
 
 func _do_next_seq_step():
@@ -242,3 +243,6 @@ func _do_next_seq_step():
 		if GlobalController.seq_step == 1:
 			$Bubble.visible = false
 			$MainSprite.play("summon")
+
+func stop_summoning():
+	$MainSprite.play("idle")

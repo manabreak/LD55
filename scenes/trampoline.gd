@@ -9,10 +9,12 @@ var bounce = true
 func _ready():
 	$TrampolineSpawnParticles.emitting = true
 	$TrampolineSpawnParticles.one_shot = true
+	$SummonSound.play()
 
 func _on_area_2d_body_entered(body):
 	if body == player:
 		print("Player stepped on trampoline!")
+		$BoingSound.play()
 		player.launch_with_trampoline()
 		destroy()
 

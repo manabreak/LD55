@@ -25,8 +25,8 @@ func _ready():
 func start_text():
 	label.text = texts[text_index]
 	var tween = get_tree().create_tween()
-	tween.tween_property(label, "modulate:a", 1.0, 2.0).set_trans(Tween.TRANS_SINE)
-	tween.tween_property(label, "modulate:a", 0.0, 2.0).set_trans(Tween.TRANS_SINE).set_delay(2.0)
+	tween.tween_property(label, "modulate:a", 1.0, 1.0).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(label, "modulate:a", 0.0, 1.0).set_trans(Tween.TRANS_SINE).set_delay(1.0)
 	tween.tween_callback(next_text)
 
 func next_text():
@@ -39,8 +39,8 @@ func next_text():
 
 func start_logo_animation():
 	var tween = get_tree().create_tween()
-	tween.tween_property(logo, "modulate:a", 1.0, 4.5).set_trans(Tween.TRANS_SINE).set_delay(0.5)
-	tween.tween_property(logo, "modulate:a", 0.0, 5.0).set_trans(Tween.TRANS_SINE).set_delay(7.0)
+	tween.tween_property(logo, "modulate:a", 1.0, 2.5).set_trans(Tween.TRANS_SINE).set_delay(0.5)
+	tween.tween_property(logo, "modulate:a", 0.0, 2.0).set_trans(Tween.TRANS_SINE).set_delay(5.0)
 	tween.tween_callback(logo_anim_done)
 
 func logo_anim_done():

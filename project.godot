@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="LD55"
-run/main_scene="res://scenes/root.tscn"
+run/main_scene="res://scenes/intro.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://icon.svg"
@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalController="*res://GlobalController.gd"
+MusicController="*res://scenes/music_controller.tscn"
 
 [display]
 

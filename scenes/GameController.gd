@@ -11,6 +11,8 @@ var player = $Player
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$GUI.get_node("EndGameUI").visible = false
+	var tween = get_tree().create_tween()
+	tween.tween_property($GUI/ColorRect, "modulate:a", 0.0, 2.0)
 	pass
 
 

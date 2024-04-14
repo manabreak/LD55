@@ -29,5 +29,5 @@ func _on_body_entered(body):
 		$GPUParticles2D.emitting = false
 		var timer = get_tree().create_timer(1.0)
 		timer.timeout.connect(queue_free)
-	elif body.collision_layer & 1 != 0:
+	elif body is CharacterBody2D and body.collision_layer & 1 != 0:
 		body.damage(1)

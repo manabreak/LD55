@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dhgy354ndntpr"]
+[gd_scene load_steps=6 format=3 uid="uid://dhgy354ndntpr"]
 
 [ext_resource type="Script" path="res://scenes/Book.gd" id="1_5bjo1"]
 [ext_resource type="Texture2D" uid="uid://b5yxywolj32dk" path="res://assets/book.png" id="2_l57fi"]
 [ext_resource type="Texture2D" uid="uid://bkqybrko7urn8" path="res://assets/circle_blur_64.png" id="3_atls2"]
+[ext_resource type="AudioStream" uid="uid://blricb1fvsec6" path="res://assets/sfx/tadaa.wav" id="4_4ll4b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_20fgt"]
 radius = 7.07107
@@ -19,5 +20,8 @@ texture = ExtResource("2_l57fi")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 texture = ExtResource("3_atls2")
+
+[node name="CollectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_4ll4b")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

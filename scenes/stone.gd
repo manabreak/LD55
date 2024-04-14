@@ -7,9 +7,12 @@ var timer = 0.0
 var player = null
 var disappearing = false
 
+var sound_played = false
+
 func _ready():
 	$StoneSpawnParticles.emitting = true
 	$StoneSpawnParticles.one_shot = true
+	$SummonSound.play()
 
 func _physics_process(delta):
 	if freeze and timer >= freeze_time:
@@ -28,5 +31,11 @@ func destroy_stone():
 	queue_free()
 
 func _on_damage_area_body_entered(body):
-	if body == player:
-		print("Damaged player!")
+	if not sound_played:
+		sound_played = true
+		$ThumpSound.play()
+
+func _on_damage_area_area_entered(area):
+	if not sound_played:
+		sound_played = true
+		$ThumpSound.play()
