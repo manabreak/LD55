@@ -42,7 +42,7 @@ scale_curve = SubResource("CurveTexture_6108c")
 alpha_curve = SubResource("CurveTexture_v6qkh")
 
 [node name="Stone" type="RigidBody2D"]
-collision_layer = 4
+collision_layer = 12
 collision_mask = 31
 can_sleep = false
 lock_rotation = true

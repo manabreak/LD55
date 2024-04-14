@@ -1,0 +1,59 @@
+[gd_scene load_steps=11 format=3 uid="uid://c3ygqroegba0g"]
+
+[ext_resource type="Script" path="res://scenes/magic_missile.gd" id="1_74n3o"]
+[ext_resource type="Texture2D" uid="uid://dm7io18854c4i" path="res://assets/white_x_16px.png" id="1_yq1xm"]
+
+[sub_resource type="Curve" id="Curve_ws2nf"]
+_data = [Vector2(0, 0.995815), 0.0, 0.0, 0, 0, Vector2(0.994728, 0.00804889), -2.68881, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_08ugl"]
+curve = SubResource("Curve_ws2nf")
+
+[sub_resource type="Gradient" id="Gradient_82x1y"]
+colors = PackedColorArray(1, 1, 1, 1, 0.639216, 0.278431, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_etjvw"]
+gradient = SubResource("Gradient_82x1y")
+
+[sub_resource type="Curve" id="Curve_nunmf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.30643, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qoryd"]
+curve = SubResource("Curve_nunmf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v50l6"]
+particle_flag_disable_z = true
+angle_min = -183.6
+angle_max = 130.5
+angular_velocity_min = -212.61
+angular_velocity_max = 202.95
+orbit_velocity_min = -0.134
+orbit_velocity_max = 0.042
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_curve = SubResource("CurveTexture_qoryd")
+color_ramp = SubResource("GradientTexture1D_etjvw")
+alpha_curve = SubResource("CurveTexture_08ugl")
+hue_variation_min = -0.01
+hue_variation_max = 0.04
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bohfv"]
+radius = 8.0
+
+[node name="MagicMissile" type="Area2D"]
+collision_mask = 13
+script = ExtResource("1_74n3o")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 128
+process_material = SubResource("ParticleProcessMaterial_v50l6")
+texture = ExtResource("1_yq1xm")
+lifetime = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_bohfv")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

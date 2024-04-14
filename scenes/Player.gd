@@ -29,9 +29,15 @@ var active_trampoline = null
 
 var anim_override_timer = 0.0
 
+var take_damage_timer = 0.0
+
 func damage(amount: int):
 	if GlobalController.health == 0:
 		return
+	
+	if take_damage_timer > 0.0:
+		return
+	take_damage_timer = 1.0
 	
 	$MainSprite.modulate = Color(1.0, 0.3, 0.3, 1.0)
 	var damage_effect_tween = get_tree().create_tween()
@@ -97,6 +103,9 @@ func _ready():
 	$Bubble.text_visible.connect(_on_text_visible)
 
 func _process(delta):
+	if take_damage_timer > 0.0:
+		take_damage_timer -= delta
+	
 	if Input.is_action_just_pressed("debug_damage"):
 		damage(1)
 	if Input.is_action_just_pressed("debug_heal"):
