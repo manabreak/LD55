@@ -889,14 +889,15 @@ tile_set = SubResource("TileSet_khmyx")
 format = 2
 layer_0/tile_data = PackedInt32Array(-327679, 65536, 1, -262143, 65536, 2, -327678, 131072, 1, -262142, 131072, 2, -327677, 65536, 1, -262141, 65536, 2, -327676, 131072, 1, -262140, 131072, 2, -327675, 65536, 1, -262139, 65536, 2, -327674, 131072, 1, -262138, 131072, 2, -327673, 65536, 1, -262137, 65536, 2, -327672, 131072, 1, -262136, 131072, 2, -327671, 65536, 1, -262135, 65536, 2, -327670, 131072, 1, -262134, 131072, 2, -327669, 65536, 1, -262133, 65536, 2, -327668, 131072, 1, -262132, 131072, 2, -327667, 65536, 1, -262131, 65536, 2, -327666, 131072, 1, -262130, 131072, 2, -327665, 65536, 1, -262129, 65536, 2, -327664, 131072, 1, -262128, 131072, 2, -196607, 65536, 1, -131071, 65536, 2, -196606, 131072, 1, -131070, 131072, 2, -196605, 65536, 1, -131069, 65536, 2, -196604, 131072, 1, -131068, 131072, 2, -196603, 65536, 1, -131067, 65536, 2, -196602, 131072, 1, -131066, 131072, 2, -196601, 65536, 1, -131065, 65536, 2, -196600, 131072, 1, -131064, 131072, 2, -196599, 65536, 1, -131063, 65536, 2, -196598, 131072, 1, -131062, 131072, 2, -196597, 65536, 1, -131061, 65536, 2, -196596, 131072, 1, -131060, 131072, 2, -196595, 65536, 1, -131059, 65536, 2, -196594, 131072, 1, -131058, 131072, 2, -196593, 65536, 1, -131057, 65536, 2, -196592, 131072, 1, -131056, 131072, 2, -196591, 65536, 1, -131055, 65536, 2, -196590, 131072, 1, -131054, 131072, 2, -65519, 65536, 1, 17, 65536, 2, -65518, 131072, 1, 18, 131072, 2, -65521, 65536, 1, 15, 65536, 2, -65520, 131072, 1, 16, 131072, 2, -65523, 65536, 1, 13, 65536, 2, -65522, 131072, 1, 14, 131072, 2, -65525, 65536, 1, 11, 65536, 2, -65524, 131072, 1, 12, 131072, 2, -65527, 65536, 1, 9, 65536, 2, -65526, 131072, 1, 10, 131072, 2, -65529, 65536, 1, 7, 65536, 2, -65528, 131072, 1, 8, 131072, 2, -65531, 65536, 1, 5, 65536, 2, -65530, 131072, 1, 6, 131072, 2, -65533, 65536, 1, 3, 65536, 2, -65532, 131072, 1, 4, 131072, 2, -65535, 65536, 1, 1, 65536, 2, -65534, 131072, 1, 2, 131072, 2, -1, 65536, 1, 65535, 65536, 2, -65536, 131072, 1, 0, 131072, 2, -131073, 65536, 1, -65537, 65536, 2, -196608, 131072, 1, -131072, 131072, 2, 65537, 65536, 1, 131073, 65536, 2, 65538, 131072, 1, 131074, 131072, 2, 65539, 65536, 1, 131075, 65536, 2, 65540, 131072, 1, 131076, 131072, 2, 65541, 65536, 1, 131077, 65536, 2, 65542, 131072, 1, 131078, 131072, 2, 65543, 65536, 1, 131079, 65536, 2, 65544, 131072, 1, 131080, 131072, 2, 65545, 65536, 1, 131081, 65536, 2, 65546, 131072, 1, 131082, 131072, 2, 65547, 65536, 1, 131083, 65536, 2, 65548, 131072, 1, 131084, 131072, 2, 65549, 65536, 1, 131085, 65536, 2, 65550, 131072, 1, 131086, 131072, 2, 65551, 65536, 1, 131087, 65536, 2, 65552, 131072, 1, 131088, 131072, 2, -589742, 0, 8, -524206, 0, 9, -458670, 0, 10, -589741, 65536, 8, -524205, 65536, 9, -458669, 65536, 10)
 
-[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("game_controller")]
-position = Vector2(645, -102)
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("game_controller", "gui")]
+position = Vector2(50, 27)
 collision_mask = 5
 script = ExtResource("3_260c8")
 fireball_scene = ExtResource("4_qrmcy")
 stone_scene = ExtResource("2_imu5o")
 trampoline_scene = ExtResource("5_fksa3")
 game_controller = NodePath("..")
+gui = NodePath("../GUI")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(-1, 4)
@@ -939,6 +940,11 @@ position = Vector2(27, 7)
 
 [node name="TrampoBook" parent="Items" node_paths=PackedStringArray("player") instance=ExtResource("11_lrvcc")]
 position = Vector2(377, -226)
+player = NodePath("../../Player")
+
+[node name="FireballBook" parent="Items" node_paths=PackedStringArray("player") instance=ExtResource("11_lrvcc")]
+position = Vector2(8, -23)
+spell_type = 0
 player = NodePath("../../Player")
 
 [node name="StoneBook" parent="Items" node_paths=PackedStringArray("player") instance=ExtResource("11_lrvcc")]
@@ -1002,7 +1008,6 @@ visible = false
 color = Color(0.2, 0.270588, 0.278431, 1)
 
 [node name="GUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("game_controller")]
-visible = false
 script = ExtResource("9_g3b6s")
 game_controller = NodePath("..")
 
@@ -1022,22 +1027,22 @@ size_flags_vertical = 3
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GUI/InGameUI/MarginContainer"]
+[node name="Hearts" type="HBoxContainer" parent="GUI/InGameUI/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="Heart0" type="TextureRect" parent="GUI/InGameUI/MarginContainer/HBoxContainer"]
+[node name="Heart0" type="TextureRect" parent="GUI/InGameUI/MarginContainer/Hearts"]
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("9_1yj5b")
 
-[node name="Heart1" type="TextureRect" parent="GUI/InGameUI/MarginContainer/HBoxContainer"]
+[node name="Heart1" type="TextureRect" parent="GUI/InGameUI/MarginContainer/Hearts"]
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("9_1yj5b")
 
-[node name="Heart2" type="TextureRect" parent="GUI/InGameUI/MarginContainer/HBoxContainer"]
+[node name="Heart2" type="TextureRect" parent="GUI/InGameUI/MarginContainer/Hearts"]
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("9_1yj5b")

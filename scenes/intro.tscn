@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://3bjhhwdgp8tc"]
+
+[ext_resource type="FontFile" uid="uid://cku343h0naeys" path="res://assets/Kenney Pixel.ttf" id="1_lekrv"]
+[ext_resource type="Script" path="res://scenes/IntroController.gd" id="2_01nka"]
+[ext_resource type="Texture2D" uid="uid://8uitsn2dbk53" path="res://assets/logo_ritual.png" id="3_31g7a"]
+[ext_resource type="Texture2D" uid="uid://bumal7y26yggq" path="res://assets/logo_of.png" id="4_tpvnb"]
+[ext_resource type="Texture2D" uid="uid://ba778o16ugbpt" path="res://assets/logo_ribbit.png" id="5_qoj7i"]
+
+[sub_resource type="Theme" id="Theme_n216c"]
+default_font = ExtResource("1_lekrv")
+default_font_size = 32
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_n216c")
+script = ExtResource("2_01nka")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CenterContainer"]
+layout_mode = 2
+text = "Sleep deprivation presents
+test test"
+horizontal_alignment = 1
+
+[node name="LogoContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Logo1" type="TextureRect" parent="CenterContainer/LogoContainer"]
+layout_mode = 2
+texture = ExtResource("3_31g7a")
+stretch_mode = 5
+
+[node name="Logo2" type="TextureRect" parent="CenterContainer/LogoContainer"]
+layout_mode = 2
+texture = ExtResource("4_tpvnb")
+stretch_mode = 5
+
+[node name="Logo3" type="TextureRect" parent="CenterContainer/LogoContainer"]
+layout_mode = 2
+texture = ExtResource("5_qoj7i")
+stretch_mode = 5

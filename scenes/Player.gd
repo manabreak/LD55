@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var stone_scene: PackedScene
 @export var trampoline_scene: PackedScene
 @export var game_controller: Node2D
+@export var gui: CanvasLayer
 
 const STONE_CAST_TIME = 1.0
 const TRAMPOLINE_CAST_TIME = 1.0
@@ -28,7 +29,7 @@ var seq_id = 0
 var seq_step = 0
 
 # spell 0 = fireball
-var spell_0_collected = true
+var spell_0_collected = false
 
 # spell 1 = trampoline
 var spell_1_collected = false
@@ -52,6 +53,8 @@ func damage(amount: int):
 	if health < 0:
 		health = 0
 	
+	gui.set_health(health)
+	
 	if health == 0:
 		print("Player died!")
 		do_die()
@@ -66,6 +69,8 @@ func heal(amount: int):
 	health += amount
 	if health > 3:
 		health = 3
+	
+	gui.set_health(health)
 	
 	print("Player healed for " + str(amount) + ", health now: " + str(health))
 
@@ -102,8 +107,10 @@ func _ready():
 	$Bubble.text_visible.connect(_on_text_visible)
 
 func _process(delta):
-	if Input.is_action_just_pressed("instakill"):
+	if Input.is_action_just_pressed("debug_damage"):
 		damage(1)
+	if Input.is_action_just_pressed("debug_heal"):
+		heal(1)
 	
 	if Input.is_action_just_pressed("choose_slot_0"):
 		if spell_0_collected:
