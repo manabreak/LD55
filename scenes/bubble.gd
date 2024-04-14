@@ -2,11 +2,12 @@ extends Control
 
 signal text_visible
 
-var text: Label
+
+@onready
+var label = $MarginContainer/Text
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	text = get_node("MarginContainer/Text")
 	visible = false
 
 
@@ -16,11 +17,11 @@ func _process(delta):
 
 func display_text(text: String, speed: float):
 	visible = true
-	self.text.text = text
-	self.text.visible_ratio = 0.0
+	label.text = text
+	label.visible_ratio = 0.0
 	
 	var tween = get_tree().create_tween()
-	tween.tween_property(self.text, "visible_ratio", 1.0, speed)
+	tween.tween_property(label, "visible_ratio", 1.0, speed)
 	tween.tween_callback(text_done)
 
 func text_done():

@@ -2,8 +2,8 @@ extends Area2D
 
 @export var magic_missile_scene: PackedScene
 
-const PHASE_ONE_HEALTH = 1
-const PHASE_TWO_HEALTH = 1
+const PHASE_ONE_HEALTH = 3
+const PHASE_TWO_HEALTH = 3
 
 var bob_timer = 0.0
 

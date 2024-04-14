@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var trampoline_scene: PackedScene
 @export var game_controller: Node2D
 @export var gui: CanvasLayer
+@export var bubble: Control
 
 const STONE_CAST_TIME = 1.0
 const TRAMPOLINE_CAST_TIME = 1.0
@@ -102,8 +103,9 @@ func collect_spell(spell: int):
 
 func _ready():
 	$MainSprite.play("idle")
-	$Bubble.get_node("ColorRect").color = Color("474418")
-	$Bubble.text_visible.connect(_on_text_visible)
+	if bubble != null:
+		bubble.get_node("ColorRect").color = Color("474418")
+		bubble.text_visible.connect(_on_text_visible)
 
 func _process(delta):
 	if take_damage_timer > 0.0:
@@ -235,7 +237,8 @@ func say_ribbit():
 	
 
 func say_ribbit_after_delay():
-	$Bubble.display_text("*Ribbit*", 0.4)
+	if bubble != null:
+		bubble.display_text("*Ribbit*", 0.4)
 
 func _on_text_visible():
 	var timer = get_tree().create_timer(1.0)
@@ -245,7 +248,8 @@ func _do_next_seq_step():
 	GlobalController.seq_step += 1
 	if GlobalController.seq_id == 0:
 		if GlobalController.seq_step == 1:
-			$Bubble.visible = false
+			if bubble != null:
+				bubble.visible = false
 			$MainSprite.play("summon")
 
 func stop_summoning():
