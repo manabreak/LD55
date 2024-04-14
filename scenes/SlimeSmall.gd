@@ -20,6 +20,7 @@ var player: CharacterBody2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	timer = randf_range(0.0, move_time)
 	initial_position = position
 	$AnimatedSprite2D.play("default")
 	

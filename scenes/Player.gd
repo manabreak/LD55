@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-@export var fireball_scene: PackedScene
 @export var stone_scene: PackedScene
 @export var trampoline_scene: PackedScene
 @export var game_controller: Node2D
@@ -26,25 +25,12 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var gravity_down = true
 
 var controls_enabled = true
-
-var seq_id = 0
-var seq_step = 0
-
-var spells = [
-	false, # Trampoline
-	false, # Stone
-	false  # Gravity
-]
-
-var active_spell = 0
 var active_trampoline = null
-
-var health = 3
 
 var anim_override_timer = 0.0
 
 func damage(amount: int):
-	if health == 0:
+	if GlobalController.health == 0:
 		return
 	
 	$MainSprite.modulate = Color(1.0, 0.3, 0.3, 1.0)
@@ -52,13 +38,13 @@ func damage(amount: int):
 	damage_effect_tween.tween_property($MainSprite, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.5)
 	
 	print("Player damaged for " + str(amount))
-	health -= amount
-	if health < 0:
-		health = 0
+	GlobalController.health -= amount
+	if GlobalController.health < 0:
+		GlobalController.health = 0
 	
-	gui.set_health(health)
+	gui.set_health(GlobalController.health)
 	
-	if health == 0:
+	if GlobalController.health == 0:
 		print("Player died!")
 		do_die()
 	else:
@@ -69,16 +55,16 @@ func damage(amount: int):
 		tween.tween_property(self, "controls_enabled", true, 0.5)
 
 func heal(amount: int):
-	health += amount
-	if health > 3:
-		health = 3
+	GlobalController.health += amount
+	if GlobalController.health > 3:
+		GlobalController.health = 3
 	
-	gui.set_health(health)
+	gui.set_health(GlobalController.health)
 	
-	print("Player healed for " + str(amount) + ", health now: " + str(health))
+	print("Player healed for " + str(amount) + ", health now: " + str(GlobalController.health))
 
 func kill():
-	health = 0
+	GlobalController.health = 0
 	do_die()
 
 func do_die():
@@ -94,7 +80,7 @@ func set_dead_sprite():
 	$MainSprite.play("dead")
 
 func collect_spell(spell: int):
-	spells[spell] = true
+	GlobalController.spells[spell] = true
 	if spell == 0:
 		print("Trampoline collected")
 		gui.show_spell_info("summon trampoline", 0)
@@ -115,16 +101,6 @@ func _process(delta):
 		damage(1)
 	if Input.is_action_just_pressed("debug_heal"):
 		heal(1)
-	
-	if Input.is_action_just_pressed("choose_slot_0"):
-		if spells[0]:
-			active_spell = 0
-	if Input.is_action_just_pressed("choose_slot_1"):
-		if spells[1]:
-			active_spell = 1
-	if Input.is_action_just_pressed("choose_slot_2"):
-		if spells[2]:
-			active_spell = 2
 
 func _physics_process(delta):
 	
@@ -133,8 +109,8 @@ func _physics_process(delta):
 	
 	# Spellcasting
 	if controls_enabled and Input.is_action_just_pressed("action"):
-		print("Pressed action; active spell = " + str(active_spell))
-		if active_spell == 0 and spells[0]:
+		print("Pressed action; active spell = " + str(GlobalController.active_spell))
+		if GlobalController.can_cast(0):
 			print("Trying to spawn a trampoline...")
 			# Trampoline
 			if trampoline_spawn_timer <= 0:
@@ -155,7 +131,7 @@ func _physics_process(delta):
 				
 				$MainSprite.play("summon")
 			anim_override_timer = 0.25
-		elif active_spell == 1 and spells[1]:
+		elif GlobalController.can_cast(1):
 			if stone_spawn_timer <= 0:
 				var stone = stone_scene.instantiate()
 				stone.player = self
@@ -168,7 +144,7 @@ func _physics_process(delta):
 				
 				$MainSprite.play("summon")
 				anim_override_timer = 0.25
-		elif active_spell == 2 and spells[2]:
+		elif GlobalController.can_cast(2):
 			if gravity_swap_timer <= 0:
 				gravity_down = not gravity_down
 				if gravity_down:
@@ -252,8 +228,8 @@ func _on_text_visible():
 	timer.timeout.connect(_do_next_seq_step)
 
 func _do_next_seq_step():
-	seq_step += 1
-	if seq_id == 0:
-		if seq_step == 1:
+	GlobalController.seq_step += 1
+	if GlobalController.seq_id == 0:
+		if GlobalController.seq_step == 1:
 			$Bubble.visible = false
 			$MainSprite.play("summon")

@@ -35,7 +35,6 @@ _data = {
 point_count = 2
 
 [node name="SlimeBig" type="Area2D"]
-position = Vector2(448, -80)
 collision_layer = 16
 script = ExtResource("1_6fjn4")
 move_time = 6.0

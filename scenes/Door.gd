@@ -21,8 +21,10 @@ func _on_body_entered(body):
 	if body == player:
 		var tween = get_tree().create_tween()
 		tween.tween_property($Sprite2D, "modulate", Color(1.0, 1.0, 1., 1.0), 1.0).set_trans(Tween.TRANS_SINE)
+		GlobalController.set_target_level("root_2")
 
 func _on_body_exited(body):
 	if body == player:
 		var tween = get_tree().create_tween()
 		tween.tween_property($Sprite2D, "modulate", Color(1.0, 1.0, 1., 0.0), 1.0).set_trans(Tween.TRANS_SINE)
+		GlobalController.set_target_level(null)
