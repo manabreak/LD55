@@ -66,3 +66,6 @@ func show_spell_info(name: String, slot: int):
 	var tween = get_tree().create_tween()
 	tween.tween_property(spell_info_container, "modulate:a", 1.0, 0.5).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(spell_info_container, "modulate:a", 0.0, 0.5).set_trans(Tween.TRANS_SINE).set_delay(5.0)
+
+func show_victory_text():
+	$VictoryUI.visible = true

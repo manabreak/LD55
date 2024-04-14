@@ -19,7 +19,11 @@ func play_main_music():
 func play_boss_music():
 	$BossMusic.play()
 
+func play_victory_music():
+	$VictoryMusic.play()
+
 func stop_music():
 	$SummoningMusic.stop()
 	$MainMusic.stop()
 	$BossMusic.stop()
+	$VictoryMusic.stop()

@@ -28,6 +28,9 @@ var player: CharacterBody2D
 @export
 var golden_frog: Sprite2D
 
+@export
+var gui: CanvasLayer
+
 @onready
 var move_target_count = move_targets.get_child_count()
 
@@ -128,13 +131,17 @@ func _kill_boss():
 	$PointLight2D.enabled = false
 	$AnimatedSprite2D.visible = false
 	$StoneSpawnParticles.emitting = true
+	collision_layer = 0
+	collision_mask = 0
 	var timer = get_tree().create_timer(2.0)
 	timer.timeout.connect(_show_golden_frog)
+	MusicController.play_victory_music()
 
 func _show_golden_frog():
 	golden_frog.visible = true
 	golden_frog.get_node("StoneSpawnParticles").emitting = true
 	golden_frog.get_node("GoldenFrogLight").enabled = true
+	gui.show_victory_text()
 
 func _set_anim_take_damage():
 	$AnimatedSprite2D.play("hit")

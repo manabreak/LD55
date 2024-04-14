@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2isxrkhy1s5m"]
+[gd_scene load_steps=6 format=3 uid="uid://d2isxrkhy1s5m"]
 
 [ext_resource type="Script" path="res://scenes/music_controller.gd" id="1_xd621"]
 [ext_resource type="AudioStream" uid="uid://d1bp21o04mwnx" path="res://assets/music/ld55_summoning.ogg" id="2_25cth"]
 [ext_resource type="AudioStream" uid="uid://c2bgabyqe83t" path="res://assets/music/ld55_main.ogg" id="3_oim3d"]
 [ext_resource type="AudioStream" uid="uid://hh36boxvccrm" path="res://assets/music/boss.ogg" id="4_018x6"]
+[ext_resource type="AudioStream" uid="uid://cbu8pl4rubmjk" path="res://assets/music/ld55_fanfares.ogg" id="5_3puta"]
 
 [node name="MusicController" type="Node"]
 script = ExtResource("1_xd621")
@@ -19,3 +20,7 @@ volume_db = -4.0
 [node name="BossMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_018x6")
 volume_db = -4.0
+
+[node name="VictoryMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_3puta")
+volume_db = -1.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cuec2paulpx"]
+[gd_scene load_steps=38 format=3 uid="uid://cuec2paulpx"]
 
 [ext_resource type="Script" path="res://scenes/GameController.gd" id="1_urwih"]
 [ext_resource type="Texture2D" uid="uid://bxtfpn1ykgxll" path="res://assets/tileset.png" id="2_jjtt8"]
@@ -755,6 +755,10 @@ default_font = ExtResource("23_iwrv0")
 default_font = ExtResource("23_iwrv0")
 default_font_size = 32
 
+[sub_resource type="Theme" id="Theme_00lgj"]
+default_font = ExtResource("23_iwrv0")
+default_font_size = 32
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1nrs0"]
 size = Vector2(481, 222)
 
@@ -802,7 +806,7 @@ position = Vector2(-21, 63)
 
 [node name="Items" type="Node2D" parent="."]
 
-[node name="Boss" type="Area2D" parent="Items" node_paths=PackedStringArray("move_targets", "player", "golden_frog")]
+[node name="Boss" type="Area2D" parent="Items" node_paths=PackedStringArray("move_targets", "player", "golden_frog", "gui")]
 position = Vector2(764, -327)
 collision_layer = 16
 collision_mask = 9
@@ -811,6 +815,7 @@ magic_missile_scene = ExtResource("15_fpjf0")
 move_targets = NodePath("../../BossMoveTargets")
 player = NodePath("../../Player")
 golden_frog = NodePath("../GoldenFrog")
+gui = NodePath("../../GUI")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Items/Boss"]
 position = Vector2(0, 5)
@@ -880,7 +885,6 @@ layer_0/tile_data = PackedInt32Array(-786429, 3, 4, -720893, 3, 4, -655357, 3, 4
 color = Color(0.2, 0.270588, 0.278431, 1)
 
 [node name="GUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("game_controller")]
-visible = false
 script = ExtResource("21_80jp1")
 game_controller = NodePath("..")
 
@@ -1017,6 +1021,32 @@ offset_right = 1981.0
 offset_bottom = 1981.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="VictoryUI" type="Control" parent="GUI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_00lgj")
+
+[node name="CenterContainer" type="CenterContainer" parent="GUI/VictoryUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/VictoryUI/CenterContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 128
+
+[node name="Label" type="Label" parent="GUI/VictoryUI/CenterContainer/MarginContainer"]
+layout_mode = 2
+text = "Thanks for playing!"
 
 [node name="BossSensor" type="Area2D" parent="." node_paths=PackedStringArray("player", "boss")]
 visible = false
