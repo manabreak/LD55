@@ -18,24 +18,23 @@ var jump_timer = 0.0
 
 var stone_spawn_timer = 0.0
 var trampoline_spawn_timer = 0.0
+var gravity_swap_timer = 0.0
 var facing_right = true
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var gravity_down = true
 
 var controls_enabled = true
 
 var seq_id = 0
 var seq_step = 0
 
-# spell 0 = fireball
-var spell_0_collected = false
-
-# spell 1 = trampoline
-var spell_1_collected = false
-
-# spell 2 = summon a stone
-var spell_2_collected = false
+var spells = [
+	false, # Trampoline
+	false, # Stone
+	false  # Gravity
+]
 
 var active_spell = 0
 var active_trampoline = null
@@ -47,6 +46,10 @@ var anim_override_timer = 0.0
 func damage(amount: int):
 	if health == 0:
 		return
+	
+	$MainSprite.modulate = Color(1.0, 0.3, 0.3, 1.0)
+	var damage_effect_tween = get_tree().create_tween()
+	damage_effect_tween.tween_property($MainSprite, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.5)
 	
 	print("Player damaged for " + str(amount))
 	health -= amount
@@ -91,15 +94,16 @@ func set_dead_sprite():
 	$MainSprite.play("dead")
 
 func collect_spell(spell: int):
+	spells[spell] = true
 	if spell == 0:
-		print("Fireball collected")
-		spell_0_collected = true
-	elif spell == 1:
 		print("Trampoline collected")
-		spell_1_collected = true
-	elif spell == 2:
+		gui.show_spell_info("summon trampoline", 0)
+	elif spell == 1:
 		print("Stone collected")
-		spell_2_collected = true
+		gui.show_spell_info("summon stone slab", 1)
+	elif spell == 2:
+		print("Gravity swap collected")
+		gui.show_spell_info("swap gravitiy", 2)
 
 func _ready():
 	$MainSprite.play("idle")
@@ -113,13 +117,13 @@ func _process(delta):
 		heal(1)
 	
 	if Input.is_action_just_pressed("choose_slot_0"):
-		if spell_0_collected:
+		if spells[0]:
 			active_spell = 0
 	if Input.is_action_just_pressed("choose_slot_1"):
-		if spell_1_collected:
+		if spells[1]:
 			active_spell = 1
 	if Input.is_action_just_pressed("choose_slot_2"):
-		if spell_2_collected:
+		if spells[2]:
 			active_spell = 2
 
 func _physics_process(delta):
@@ -130,21 +134,7 @@ func _physics_process(delta):
 	# Spellcasting
 	if controls_enabled and Input.is_action_just_pressed("action"):
 		print("Pressed action; active spell = " + str(active_spell))
-		if active_spell == 0 and spell_0_collected:
-			# Fireball casting spell
-			var fireball = fireball_scene.instantiate()
-			fireball.player = self
-			if facing_right:
-				fireball.position = position + Vector2(16.0, 5.0)
-				fireball.linear_velocity = Vector2(400.0, 0.0)
-			else:
-				fireball.position = position + Vector2(-16.0, 5.0)
-				fireball.linear_velocity = Vector2(-400.0, 0.0)
-			
-			get_parent().get_node("Items").add_child(fireball)
-			$MainSprite.play("summon")
-			anim_override_timer = 0.25
-		elif active_spell == 1 and spell_1_collected:
+		if active_spell == 0 and spells[0]:
 			print("Trying to spawn a trampoline...")
 			# Trampoline
 			if trampoline_spawn_timer <= 0:
@@ -165,7 +155,7 @@ func _physics_process(delta):
 				
 				$MainSprite.play("summon")
 			anim_override_timer = 0.25
-		elif active_spell == 2 and spell_2_collected:
+		elif active_spell == 1 and spells[1]:
 			if stone_spawn_timer <= 0:
 				var stone = stone_scene.instantiate()
 				stone.player = self
@@ -178,11 +168,26 @@ func _physics_process(delta):
 				
 				$MainSprite.play("summon")
 				anim_override_timer = 0.25
+		elif active_spell == 2 and spells[2]:
+			if gravity_swap_timer <= 0:
+				gravity_down = not gravity_down
+				if gravity_down:
+					up_direction = Vector2(0, -1)
+				else:
+					up_direction = Vector2(0, 1)
+				gravity = -gravity
+				$MainSprite.flip_v = not $MainSprite.flip_v
+				if $MainSprite.flip_v:
+					$MainSprite.position.y = 9
+				else:
+					$MainSprite.position.y = 0
 	
 	if stone_spawn_timer > 0.0:
 		stone_spawn_timer -= delta
 	if trampoline_spawn_timer > 0.0:
 		trampoline_spawn_timer -= delta
+	if gravity_swap_timer > 0.0:
+		gravity_swap_timer -= delta
 	
 	# Add the gravity.
 	if not is_on_floor():
@@ -190,10 +195,16 @@ func _physics_process(delta):
 
 	# Handle jump.
 	if controls_enabled and Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY_INITIAL
+		if gravity_down:
+			velocity.y = JUMP_VELOCITY_INITIAL
+		else:
+			velocity.y = -JUMP_VELOCITY_INITIAL
 		jump_timer = JUMP_APPLY_TIME
 	elif controls_enabled and Input.is_action_pressed("jump") and jump_timer > 0:
-		velocity.y += JUMP_APPLY_FORCE * jump_timer
+		if gravity_down:
+			velocity.y += JUMP_APPLY_FORCE * jump_timer
+		else:
+			velocity.y -= JUMP_APPLY_FORCE * jump_timer
 		jump_timer -= delta
 	else:
 		jump_timer = 0

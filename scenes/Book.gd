@@ -4,11 +4,12 @@ var timer = 0.0
 var start_y = 0.0
 
 # Spell types:
-# 0 = fireball (already acquired at start)
+# 0 = trampoline
 # 1 = summon a stone
+# 2 = gravity
 
 @export
-var spell_type = 1
+var spell_type = 0
 
 @export
 var player: CharacterBody2D

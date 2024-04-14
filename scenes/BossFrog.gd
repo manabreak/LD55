@@ -43,7 +43,6 @@ func _do_next_seq_step():
 		elif seq_step == 4:
 			$Bubble.visible = false
 			play("summon")
-			# player.get_node("MainSprite").play("summon")
 			# TODO Play summoning music, do effects etc.
 			
 			var timer = get_tree().create_timer(2.0)
@@ -57,7 +56,11 @@ func _do_next_seq_step():
 			$Bubble.display_text("Mwahahaa! So long, you fool! Thanks for helping me out!", 3.5)
 		elif seq_step == 8:
 			$Bubble.visible = false
-			# TODO Boss frog away!
+			# Boss frog away!
+			var particles = $StoneSpawnParticles
+			particles.reparent(get_parent())
+			particles.emitting = true
+			visible = false
 			var timer = get_tree().create_timer(2.0)
 			timer.timeout.connect(_do_next_seq_step)
 		elif seq_step == 9:
